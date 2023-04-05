@@ -1,6 +1,9 @@
 import 'package:ecorporativo/src/features/authentication/presenter/pages/contract_acceptance_page.dart';
+import 'package:ecorporativo/src/features/authentication/presenter/pages/contract_successs_page.dart';
+import 'package:ecorporativo/src/features/authentication/presenter/pages/contract_popup_terms_page.dart';
 import 'package:ecorporativo/src/features/authentication/presenter/pages/signin_page.dart';
 import 'package:ecorporativo/src/features/authentication/presenter/pages/splash_page.dart';
+import 'package:ecorporativo/src/features/home/presenter/pages/home_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -27,14 +30,17 @@ class MyApp extends StatelessWidget {
             onError: Colors.red,
             surface: Color(0xfff8f8f8),
             onSurface: Color(0xfff8f8f8),
+            onPrimaryContainer: Color(0xff10375C),
           ),
           fontFamily: "NotoSans"),
       routes: {
         "/signin": (context) => const SigninPage(),
         "/contract_acceptance": (context) => const ContractAcceptancePage(),
-        //  "/contract_acceptance/view": (context) => const ContractAcceptancePage(),
-        //   "/contract_acceptance/successs": (context) =>
-        //     const ContractAcceptancePage(),
+        "/contract_acceptance/read": (context) =>
+            const ContractPopupTermsPage(),
+        "/contract_acceptance/success": (context) =>
+            const ContractSuccessPage(),
+        "/home": (context) => const HomePage(),
       },
       home: const SplashPage(),
     );

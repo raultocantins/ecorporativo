@@ -1,4 +1,6 @@
+import 'package:ecorporativo/src/features/authentication/presenter/widgets/card_contract_widget.dart';
 import 'package:flutter/material.dart';
+import '../widgets/button_custom_widget.dart';
 
 class ContractAcceptancePage extends StatefulWidget {
   const ContractAcceptancePage({super.key});
@@ -14,10 +16,11 @@ class _ContractAcceptancePageState extends State<ContractAcceptancePage> {
       child: Scaffold(
         backgroundColor: Theme.of(context).colorScheme.primary,
         appBar: AppBar(
-          elevation: 0,
-          iconTheme: const IconThemeData(color: Colors.white),
-          backgroundColor: Colors.transparent,
-        ),
+            elevation: 0,
+            iconTheme: const IconThemeData(color: Colors.white),
+            backgroundColor: Colors.transparent,
+            leading: IconButton(
+                onPressed: () {}, icon: const Icon(Icons.arrow_back))),
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Column(
@@ -44,30 +47,29 @@ class _ContractAcceptancePageState extends State<ContractAcceptancePage> {
                     fontWeight: FontWeight.w500,
                     color: Colors.white),
               ),
+              const SizedBox(
+                height: 76,
+              ),
+              const SizedBox(
+                height: 150,
+                width: double.infinity,
+                child: CardContractWidget(
+                  title: 'Contrato de\nprestação de serviço',
+                  subtile: 'Plano Residencial Fibra 300 Mb',
+                  andress: 'End. ARSE 22 Rua 10 lote 02',
+                ),
+              ),
               const Expanded(
                 child: SizedBox(),
               ),
-              ElevatedButton(
-                onPressed: () {},
-                style: ButtonStyle(
-                  shape: MaterialStateProperty.all(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                  ),
-                  backgroundColor: MaterialStateProperty.all(
-                      Theme.of(context).colorScheme.secondary),
-                  fixedSize: MaterialStateProperty.all(
-                    const Size(388, 56),
-                  ),
-                ),
-                child: Text(
-                  "Continuar",
-                  style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w700,
-                      color: Theme.of(context).colorScheme.primary),
-                ),
+              ButtonCustomWidget(
+                title: "Continuar",
+                fontSize: 16,
+                height: 56,
+                width: double.infinity,
+                onPressed: () {
+                  Navigator.of(context).pushNamed('/contract_acceptance/read');
+                },
               ),
               const SizedBox(
                 height: 30,
