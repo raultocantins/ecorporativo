@@ -12,16 +12,16 @@ class ContractAcceptancePage extends StatefulWidget {
 class _ContractAcceptancePageState extends State<ContractAcceptancePage> {
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: Theme.of(context).colorScheme.primary,
-        appBar: AppBar(
-            elevation: 0,
-            iconTheme: const IconThemeData(color: Colors.white),
-            backgroundColor: Colors.transparent,
-            leading: IconButton(
-                onPressed: () {}, icon: const Icon(Icons.arrow_back))),
-        body: Padding(
+    return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.primary,
+      appBar: AppBar(
+          elevation: 0,
+          iconTheme: const IconThemeData(color: Colors.white),
+          backgroundColor: Colors.transparent,
+          leading:
+              IconButton(onPressed: () {}, icon: const Icon(Icons.arrow_back))),
+      body: SafeArea(
+        child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
