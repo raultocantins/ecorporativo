@@ -1,4 +1,5 @@
 import 'package:ecorporativo/src/features/home/presenter/pages/invoices_page.dart';
+import 'package:ecorporativo/src/features/home/presenter/pages/support_page.dart';
 import 'package:ecorporativo/src/features/home/presenter/widgets/home_card_custom.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -192,11 +193,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                 ),
               ),
               const InvoicesPage(),
-              const SizedBox(
-                child: Center(
-                  child: Text("terceira pagina"),
-                ),
-              ),
+              const SupportPage(),
               const SizedBox(
                 child: Center(
                   child: Text("quarta pagina"),
