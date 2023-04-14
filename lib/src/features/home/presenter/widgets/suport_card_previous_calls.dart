@@ -54,16 +54,27 @@ class SupportCardPreviousCallWidget extends StatelessWidget {
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                ElevatedButton(
-                  onPressed: () {},
-                  style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(
-                          const Color(0xff4CAF50)), //ADD IN THEME
-                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                          RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(25),
-                      ))),
-                  child: const Text('atendido'),
+                SizedBox(
+                  height: 20,
+                  width: 96,
+                  child: ElevatedButton(
+                    onPressed: () {},
+                    style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all(
+                            const Color(0xff4CAF50)), //ADD IN THEME
+                        shape:
+                            MaterialStateProperty.all<RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(25),
+                        ))),
+                    child: Text(
+                      'atendido',
+                      style: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w400,
+                          color: Theme.of(context).colorScheme.background),
+                    ),
+                  ),
                 ),
               ],
             ),
