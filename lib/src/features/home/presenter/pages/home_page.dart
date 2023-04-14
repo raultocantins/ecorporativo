@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../widgets/home_card_bill_custom.dart';
+import 'history_invoices_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -192,11 +193,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                 ),
               ),
               const InvoicesPage(),
-              const SizedBox(
-                child: Center(
-                  child: Text("terceira pagina"),
-                ),
-              ),
+              const HistoryInvoicesPage(),
               const SizedBox(
                 child: Center(
                   child: Text("quarta pagina"),
