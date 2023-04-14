@@ -45,79 +45,105 @@ class _InvoicesPageState extends State<InvoicesPage> {
               height: 4,
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Colors.white, //  ADD IN THEME
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                height: 124,
-                width: double.infinity,
-                child: Row(
-                  children: [
-                    const SizedBox(
-                      width: 8,
-                    ),
-                    Container(
-                      height: 92,
-                      width: 5,
-                      color: Colors.red, //ADD IN THEME
-                    ),
-                    const SizedBox(
-                      width: 16,
-                    ),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Você possui faturas em aberto ',
-                          style: TextStyle(
-                              color: Theme.of(context).colorScheme.primary,
-                              fontSize: 20),
-                        ),
-                        Text(
-                          'Seu plano está suspenso',
-                          style: TextStyle(
-                              color: Theme.of(context).colorScheme.primary,
-                              fontSize: 16),
-                        ),
-                        Text(
-                          'Se já tiver efetuado o pagamento favor\n desconsidere este aviso.',
-                          style: TextStyle(
-                              color: Colors.grey.shade400, //ADD IN THEME
-                              fontSize: 12),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                  Column(
                     children: [
                       Container(
-                        height: 48,
-                        width: 180,
                         decoration: BoxDecoration(
-                            color: Theme.of(context).colorScheme.secondary,
-                            borderRadius: BorderRadius.circular(8)),
-                        child: const Center(child: Text('informar pagamento')),
+                          color: Colors.white, //ADD IN THEME
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        height: 124,
+                        width: double.infinity,
+                        child: Row(
+                          children: [
+                            const SizedBox(
+                              width: 8,
+                            ),
+                            Container(
+                              height: 92,
+                              width: 5,
+                              color: Colors.red, //ADD IN THEME
+                            ),
+                            const SizedBox(
+                              width: 16,
+                            ),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Você possui faturas em aberto ',
+                                  style: TextStyle(
+                                      color:
+                                          Theme.of(context).colorScheme.primary,
+                                      fontSize: 20),
+                                ),
+                                Text(
+                                  'Seu plano está suspenso',
+                                  style: TextStyle(
+                                      color:
+                                          Theme.of(context).colorScheme.primary,
+                                      fontSize: 16),
+                                ),
+                                Text(
+                                  'Se já tiver efetuado o pagamento favor\n desconsidere este aviso.',
+                                  style: TextStyle(
+                                      color:
+                                          Colors.grey.shade400, //ADD IN THEME
+                                      fontSize: 12),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
-                      Container(
-                        height: 48,
-                        width: 180,
-                        decoration: BoxDecoration(
-                            color: Colors.black45,
-                            borderRadius: BorderRadius.circular(8)),
-                        child:
-                            const Center(child: Text('Liberação de confiança')),
+                      const SizedBox(
+                        height: 8,
+                      ),
+                      SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            ElevatedButton(
+                              onPressed: () {},
+                              style: ButtonStyle(
+                                  fixedSize: MaterialStateProperty.all(
+                                    const Size(180, 48),
+                                  ),
+                                  backgroundColor: MaterialStatePropertyAll(
+                                    Theme.of(context).colorScheme.secondary,
+                                  )),
+                              child: const Center(
+                                child: Text('informar pagamento'),
+                              ),
+                            ),
+                            ElevatedButton(
+                              onPressed: () {},
+                              style: ButtonStyle(
+                                  elevation: const MaterialStatePropertyAll(0),
+                                  fixedSize: MaterialStateProperty.all(
+                                    const Size(180, 48),
+                                  ),
+                                  padding: const MaterialStatePropertyAll(
+                                      EdgeInsets.all(0)),
+                                  backgroundColor:
+                                      const MaterialStatePropertyAll(
+                                          Colors.transparent)),
+                              child: Center(
+                                child: Center(
+                                    child: Text(
+                                  'Liberação de confiança',
+                                  style: TextStyle(color: Colors.grey.shade400),
+                                )),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ],
                   ),
@@ -159,35 +185,49 @@ class _InvoicesPageState extends State<InvoicesPage> {
                   const SizedBox(
                     height: 10,
                   ),
-                  SizedBox(
-                    height: 200,
-                    width: double.infinity,
-                    child: ListView.builder(
-                      itemCount: 10,
-                      itemBuilder: ((context, index) {
-                        return Column(
-                          children: const [
-                            CardHomeBillCustom(
-                                title: 'Março 2023',
-                                subtitle: 'Plano Residencial Fibra 300 Mb',
-                                color: Color(0xffF9BD28), //ADD IN THEME
-                                price: Text('R\$ 99.00')),
-                            SizedBox(height: 8)
-                          ],
-                        );
-                      }),
-                    ),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      TextButton(
-                        onPressed: () {},
-                        child: const Text(
-                          'Ver mais',
-                        ),
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 20),
+                    child: SizedBox(
+                      height: 350,
+                      width: double.infinity,
+                      child: ListView.builder(
+                        itemCount: 4,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemBuilder: ((context, index) {
+                          return Column(
+                            children: [
+                              const CardHomeBillCustom(
+                                  title: 'Março 2023',
+                                  subtitle: 'Plano Residencial Fibra 300 Mb',
+                                  color: Color(0xffF9BD28), //ADD IN THEME
+                                  price: Text('R\$ 99.00')),
+                              const SizedBox(height: 8),
+                              index == 3
+                                  ? Column(
+                                      children: [
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.end,
+                                          children: [
+                                            TextButton(
+                                              onPressed: () {
+                                                Navigator.of(context).pushNamed(
+                                                    "/invoices-choose-date");
+                                              },
+                                              child: const Text(
+                                                'Ver mais',
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    )
+                                  : Container(),
+                            ],
+                          );
+                        }),
                       ),
-                    ],
+                    ),
                   ),
                 ],
               ),

@@ -6,6 +6,8 @@ import 'package:ecorporativo/src/features/authentication/presenter/pages/splash_
 import 'package:ecorporativo/src/features/home/presenter/pages/home_page.dart';
 import 'package:flutter/material.dart';
 
+import 'src/features/home/presenter/pages/history_invoices_page.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -41,6 +43,7 @@ class MyApp extends StatelessWidget {
         "/contract_acceptance/success": (context) =>
             const ContractSuccessPage(),
         "/home": (context) => const HomePage(),
+        "/invoices-choose-date": (context) => const HistoryInvoicesPage(),
       },
       home: const SplashPage(),
     );
