@@ -22,7 +22,7 @@ class _SupportPageState extends State<SupportPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              height: 70,
+              height: 80,
               width: double.infinity,
               color: Theme.of(context).colorScheme.primary,
               child: Padding(

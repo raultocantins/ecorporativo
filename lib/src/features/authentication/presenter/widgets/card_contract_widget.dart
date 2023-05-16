@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class CardContractWidget extends StatelessWidget {
+  final int id;
   final String title;
   final String subtile;
   final String andress;
 
   const CardContractWidget(
-      {required this.title,
+      {required this.id,
+      required this.title,
       required this.subtile,
       required this.andress,
       super.key});

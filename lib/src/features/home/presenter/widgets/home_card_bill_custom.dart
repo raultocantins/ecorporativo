@@ -5,10 +5,12 @@ class CardHomeBillCustom extends StatelessWidget {
   final String subtitle;
   final Widget price;
   final Color? color;
+  final String status;
   const CardHomeBillCustom(
       {required this.title,
       required this.subtitle,
       required this.price,
+      required this.status,
       this.color,
       super.key});
 
@@ -41,7 +43,7 @@ class CardHomeBillCustom extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             price,
-            Text("em aberto",
+            Text(status,
                 style: TextStyle(color: Colors.grey.shade400, fontSize: 12))
           ],
         ),

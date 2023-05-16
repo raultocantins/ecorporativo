@@ -1,4 +1,7 @@
+import 'package:ecorporativo/src/features/authentication/presenter/controller/auth_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:get_it/get_it.dart';
 
 class ContractPopupTermsPage extends StatefulWidget {
   const ContractPopupTermsPage({super.key});
@@ -8,9 +11,20 @@ class ContractPopupTermsPage extends StatefulWidget {
 }
 
 class _ContractPopupTermsPageState extends State<ContractPopupTermsPage> {
+  late AuthController authController;
   bool isChecked = false;
+  int? contractId;
+
+  @override
+  void initState() {
+    super.initState();
+    authController = GetIt.I.get<AuthController>();
+  }
+
   @override
   Widget build(BuildContext context) {
+    final arguments = (ModalRoute.of(context)?.settings.arguments ??
+        <String, dynamic>{}) as Map;
     return Scaffold(
         backgroundColor: Theme.of(context).colorScheme.background,
         appBar: AppBar(
@@ -97,9 +111,8 @@ class _ContractPopupTermsPageState extends State<ContractPopupTermsPage> {
                 const SizedBox(height: 40),
                 ElevatedButton(
                   onPressed: () {
-                    if (isChecked == true) {
-                      Navigator.of(context)
-                          .pushReplacementNamed('/contract_acceptance/success');
+                    if (isChecked) {
+                      authController.signContract(arguments['contractId']);
                     }
                   },
                   style: ButtonStyle(
@@ -115,13 +128,17 @@ class _ContractPopupTermsPageState extends State<ContractPopupTermsPage> {
                       const Size(348, 48),
                     ),
                   ),
-                  child: Text(
-                    'Aceito os termos',
-                    style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w700,
-                        color: Theme.of(context).colorScheme.primary),
-                  ),
+                  child: Observer(builder: (context) {
+                    return authController.isLoading
+                        ? const CircularProgressIndicator()
+                        : Text(
+                            'Aceito os termos',
+                            style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w700,
+                                color: Theme.of(context).colorScheme.primary),
+                          );
+                  }),
                 ),
                 const SizedBox(
                   height: 52,

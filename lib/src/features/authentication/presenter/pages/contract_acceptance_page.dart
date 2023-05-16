@@ -1,5 +1,7 @@
+import 'package:ecorporativo/src/features/authentication/presenter/controller/auth_controller.dart';
 import 'package:ecorporativo/src/features/authentication/presenter/widgets/card_contract_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import '../widgets/button_custom_widget.dart';
 
 class ContractAcceptancePage extends StatefulWidget {
@@ -10,6 +12,18 @@ class ContractAcceptancePage extends StatefulWidget {
 }
 
 class _ContractAcceptancePageState extends State<ContractAcceptancePage> {
+  late AuthController authController;
+
+  @override
+  void initState() {
+    super.initState();
+    authController = GetIt.I.get<AuthController>();
+  }
+
+  shortText(String text) {
+    return (text.length > 23 ? text.substring(0, 23) : text).toLowerCase();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,7 +45,7 @@ class _ContractAcceptancePageState extends State<ContractAcceptancePage> {
                 height: 120,
               ),
               Text(
-                "Bem-vindo,\nFulano!",
+                "Bem-vindo,\n${shortText(authController.user?.fullname ?? "")}!",
                 style: TextStyle(
                     fontSize: 32,
                     fontWeight: FontWeight.w600,
@@ -50,10 +64,11 @@ class _ContractAcceptancePageState extends State<ContractAcceptancePage> {
               const SizedBox(
                 height: 76,
               ),
-              const SizedBox(
+              SizedBox(
                 height: 150,
                 width: double.infinity,
                 child: CardContractWidget(
+                  id: authController.unsignedContracts[0].id,
                   title: 'Contrato de\nprestação de serviço',
                   subtile: 'Plano Residencial Fibra 300 Mb',
                   andress: 'End. ARSE 22 Rua 10 lote 02',
@@ -68,7 +83,10 @@ class _ContractAcceptancePageState extends State<ContractAcceptancePage> {
                 height: 56,
                 width: double.infinity,
                 onPressed: () {
-                  Navigator.of(context).pushNamed('/contract_acceptance/read');
+                  Navigator.of(context).pushNamed('/contract_acceptance/read',
+                      arguments: {
+                        "contractId": authController.unsignedContracts[0].id
+                      });
                 },
               ),
               const SizedBox(

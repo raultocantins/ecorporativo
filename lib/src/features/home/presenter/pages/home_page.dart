@@ -1,10 +1,10 @@
+import 'package:ecorporativo/src/features/authentication/presenter/controller/auth_controller.dart';
 import 'package:ecorporativo/src/features/home/presenter/pages/invoices_page.dart';
 import 'package:ecorporativo/src/features/home/presenter/pages/support_page.dart';
 import 'package:ecorporativo/src/features/home/presenter/widgets/home_card_custom.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-
-import '../widgets/home_card_bill_custom.dart';
+import 'package:get_it/get_it.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -15,9 +15,11 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   late TabController tabController;
+  late AuthController authController;
   @override
   void initState() {
     super.initState();
+    authController = GetIt.I.get<AuthController>();
     tabController = TabController(
       initialIndex: 0,
       length: 4,
@@ -28,7 +30,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   String appbarTitle() {
     switch (tabController.index) {
       case 0:
-        return "Olá Fulano";
+        return "Olá ${shortText(authController.user?.fullname ?? "")}";
 
       case 1:
         return "Faturas";
@@ -40,6 +42,10 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
       default:
         return "";
     }
+  }
+
+  shortText(String text) {
+    return (text.length > 23 ? text.substring(0, 23) : text).toLowerCase();
   }
 
   void changeIndexPage(int index) {
@@ -152,42 +158,59 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                               ]),
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 20, vertical: 24),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Text('Últimas faturas',
-                                style: TextStyle(
-                                    fontSize: 20, fontWeight: FontWeight.w500)),
-                            const SizedBox(
-                              height: 20,
-                            ),
-                            SizedBox(
-                              height: 400,
-                              width: double.infinity,
-                              child: ListView.builder(
-                                itemCount: 3,
-                                itemBuilder: ((context, index) {
-                                  return Column(
-                                    children: const [
-                                      CardHomeBillCustom(
-                                          title: 'Março 2023',
-                                          subtitle:
-                                              'Plano Residencial Fibra 300 Mb',
-                                          color:
-                                              Color(0xffF9BD28), //ADD IN THEME
-                                          price: Text('R\$ 99.00')),
-                                      SizedBox(height: 8)
-                                    ],
-                                  );
-                                }),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
+
+                      SizedBox(
+                        width: double.infinity,
+                        height: 300,
+                        child: ListView.builder(
+                            itemCount: authController
+                                    .contractsList?.contracts.length ??
+                                0,
+                            itemBuilder: (context, i) {
+                              return ListTile(
+                                title: Text(authController
+                                        .contractsList?.contracts[i].id
+                                        .toString() ??
+                                    ""),
+                              );
+                            }),
+                      )
+                      // Padding(
+                      //   padding: const EdgeInsets.symmetric(
+                      //       horizontal: 20, vertical: 24),
+                      //   child: Column(
+                      //     crossAxisAlignment: CrossAxisAlignment.start,
+                      //     children: [
+                      //       const Text('Últimas faturas',
+                      //           style: TextStyle(
+                      //               fontSize: 20, fontWeight: FontWeight.w500)),
+                      //       const SizedBox(
+                      //         height: 20,
+                      //       ),
+                      //       SizedBox(
+                      //         height: 400,
+                      //         width: double.infinity,
+                      //         child: ListView.builder(
+                      //           itemCount: 3,
+                      //           itemBuilder: ((context, index) {
+                      //             return Column(
+                      //               children: const [
+                      //                 CardHomeBillCustom(
+                      //                     title: 'Março 2023',
+                      //                     subtitle:
+                      //                         'Plano Residencial Fibra 300 Mb',
+                      //                     color:
+                      //                         Color(0xffF9BD28), //ADD IN THEME
+                      //                     price: Text('R\$ 99.00')),
+                      //                 SizedBox(height: 8)
+                      //               ],
+                      //             );
+                      //           }),
+                      //         ),
+                      //       ),
+                      //     ],
+                      //   ),
+                      // ),
                     ],
                   ),
                 ),

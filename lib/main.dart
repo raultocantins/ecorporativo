@@ -4,11 +4,16 @@ import 'package:ecorporativo/src/features/authentication/presenter/pages/contrac
 import 'package:ecorporativo/src/features/authentication/presenter/pages/signin_page.dart';
 import 'package:ecorporativo/src/features/authentication/presenter/pages/splash_page.dart';
 import 'package:ecorporativo/src/features/home/presenter/pages/home_page.dart';
+import 'package:ecorporativo/src/shared/config/navigation.dart';
 import 'package:flutter/material.dart';
 
 import 'src/features/home/presenter/pages/history_invoices_page.dart';
+import 'src/shared/config/dependencies.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  // await dotenv.load(fileName: ".env");
+  registerDependencies();
   runApp(const MyApp());
 }
 
@@ -19,6 +24,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'E-corporativo',
       debugShowCheckedModeBanner: false,
+      navigatorKey: NavigationCustom.navigatorKey,
       theme: ThemeData(
           colorScheme: const ColorScheme(
             brightness: Brightness.light,
