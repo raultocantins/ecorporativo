@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
-import 'package:ecorporativo/src/features/home/data/datasources/get_contracts_datasource.dart';
 import 'package:ecorporativo/src/features/home/data/models/invoices_model.dart';
+
+import '../data/datasources/get_invoices_datasource.dart';
 
 class GetInvoicesDatasourceImpl implements GetInvoicesDatasource {
   @override

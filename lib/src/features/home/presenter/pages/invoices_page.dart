@@ -68,12 +68,12 @@ class _InvoicesPageState extends State<InvoicesPage> {
                                       return DropdownMenuItem(
                                         value: e.id,
                                         child: Text(
-                                          e.id.toString(),
+                                          "Contrato ${e.id}",
                                           style: TextStyle(
                                               color: Theme.of(context)
                                                   .colorScheme
                                                   .background,
-                                              fontSize: 24),
+                                              fontSize: 20),
                                         ),
                                       );
                                     }).toList()
@@ -102,158 +102,150 @@ class _InvoicesPageState extends State<InvoicesPage> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Column(
-                            children: [
-                              Container(
-                                decoration: BoxDecoration(
-                                  color: Colors.white, //ADD IN THEME
-                                  borderRadius: BorderRadius.circular(12),
-                                ),
-                                height: 124,
-                                width: double.infinity,
-                                child: Row(
+                          (_controller.invoices?.invoices
+                                      .where((element) =>
+                                          element.situacao == "B" ||
+                                          element.situacao == "C")
+                                      .isNotEmpty ??
+                                  false)
+                              ? Column(
                                   children: [
-                                    const SizedBox(
-                                      width: 8,
-                                    ),
                                     Container(
-                                      height: 92,
-                                      width: 5,
-                                      color: Colors.red, //ADD IN THEME
+                                      decoration: BoxDecoration(
+                                        color: Colors.white, //ADD IN THEME
+                                        borderRadius: BorderRadius.circular(12),
+                                      ),
+                                      height: 124,
+                                      width: double.infinity,
+                                      child: Row(
+                                        children: [
+                                          const SizedBox(
+                                            width: 8,
+                                          ),
+                                          Container(
+                                            height: 92,
+                                            width: 5,
+                                            color: Colors.red, //ADD IN THEME
+                                          ),
+                                          const SizedBox(
+                                            width: 16,
+                                          ),
+                                          Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                'Você possui faturas em aberto ',
+                                                style: TextStyle(
+                                                    color: Theme.of(context)
+                                                        .colorScheme
+                                                        .primary,
+                                                    fontSize: 20),
+                                              ),
+                                              Text(
+                                                'Seu plano está suspenso',
+                                                style: TextStyle(
+                                                    color: Theme.of(context)
+                                                        .colorScheme
+                                                        .primary,
+                                                    fontSize: 16),
+                                              ),
+                                              Text(
+                                                'Se já tiver efetuado o pagamento favor\n desconsidere este aviso.',
+                                                style: TextStyle(
+                                                    color: Colors.grey
+                                                        .shade400, //ADD IN THEME
+                                                    fontSize: 12),
+                                              ),
+                                            ],
+                                          )
+                                        ],
+                                      ),
                                     ),
                                     const SizedBox(
-                                      width: 16,
+                                      height: 10,
                                     ),
-                                    Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.end,
                                       children: [
-                                        Text(
-                                          'Você possui faturas em aberto ',
-                                          style: TextStyle(
-                                              color: Theme.of(context)
-                                                  .colorScheme
-                                                  .primary,
-                                              fontSize: 20),
-                                        ),
-                                        Text(
-                                          'Seu plano está suspenso',
-                                          style: TextStyle(
-                                              color: Theme.of(context)
-                                                  .colorScheme
-                                                  .primary,
-                                              fontSize: 16),
-                                        ),
-                                        Text(
-                                          'Se já tiver efetuado o pagamento favor\n desconsidere este aviso.',
-                                          style: TextStyle(
-                                              color: Colors
-                                                  .grey.shade400, //ADD IN THEME
-                                              fontSize: 12),
+                                        ElevatedButton(
+                                          onPressed: () {},
+                                          style: ButtonStyle(
+                                              fixedSize:
+                                                  MaterialStateProperty.all(
+                                                const Size(200, 48),
+                                              ),
+                                              backgroundColor:
+                                                  MaterialStatePropertyAll(
+                                                Theme.of(context)
+                                                    .colorScheme
+                                                    .secondary,
+                                              )),
+                                          child: const Center(
+                                            child:
+                                                Text('Liberação de confiança'),
+                                          ),
                                         ),
                                       ],
                                     ),
                                   ],
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 8,
-                              ),
-                              SingleChildScrollView(
-                                scrollDirection: Axis.horizontal,
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    ElevatedButton(
-                                      onPressed: () {},
-                                      style: ButtonStyle(
-                                          fixedSize: MaterialStateProperty.all(
-                                            const Size(180, 48),
-                                          ),
-                                          backgroundColor:
-                                              MaterialStatePropertyAll(
-                                            Theme.of(context)
-                                                .colorScheme
-                                                .secondary,
-                                          )),
-                                      child: const Center(
-                                        child: Text('informar pagamento'),
-                                      ),
-                                    ),
-                                    ElevatedButton(
-                                      onPressed: () {},
-                                      style: ButtonStyle(
-                                          elevation:
-                                              const MaterialStatePropertyAll(0),
-                                          fixedSize: MaterialStateProperty.all(
-                                            const Size(180, 48),
-                                          ),
-                                          padding:
-                                              const MaterialStatePropertyAll(
-                                                  EdgeInsets.all(0)),
-                                          backgroundColor:
-                                              const MaterialStatePropertyAll(
-                                                  Colors.transparent)),
-                                      child: Center(
-                                        child: Center(
-                                            child: Text(
-                                          'Liberação de confiança',
-                                          style: TextStyle(
-                                              color: Colors.grey.shade400),
-                                        )),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
+                                )
+                              : Container(),
                           const SizedBox(
-                            height: 8,
+                            height: 10,
                           ),
                           const Text('Últimas faturas',
                               style: TextStyle(
                                   fontSize: 20, fontWeight: FontWeight.w500)),
                           const SizedBox(
-                            height: 8,
+                            height: 10,
                           ),
-                          SizedBox(
-                            height: 120,
-                            width: double.infinity,
-                            child: ListView.builder(
-                              scrollDirection: Axis.horizontal,
-                              itemCount:
-                                  (_controller.invoices?.invoices.length ?? 0) >
-                                          3
-                                      ? 3
-                                      : (_controller
-                                              .invoices?.invoices.length ??
-                                          0),
-                              itemBuilder: (context, index) {
-                                return Row(
-                                  children: [
-                                    HomeCardLastIncoices(
-                                      title: _controller.getMonth(_controller
-                                          .invoices
-                                          ?.invoices[index]
-                                          .dataVencimento),
-                                      price: _controller.formatPrice(_controller
-                                          .invoices?.invoices[index].valor),
-                                      validity: _controller.getDate(_controller
-                                          .invoices
-                                          ?.invoices[index]
-                                          .dataVencimento),
-                                    ),
-                                    const SizedBox(
-                                      width: 16,
-                                    )
-                                  ],
-                                );
-                              },
-                            ),
-                          ),
+                          (_controller.invoices?.invoices.isNotEmpty ?? false)
+                              ? SizedBox(
+                                  height: 120,
+                                  width: double.infinity,
+                                  child: ListView.builder(
+                                    scrollDirection: Axis.horizontal,
+                                    itemCount: (_controller.invoices?.invoices
+                                                    .length ??
+                                                0) >
+                                            3
+                                        ? 3
+                                        : (_controller
+                                                .invoices?.invoices.length ??
+                                            0),
+                                    itemBuilder: (context, index) {
+                                      return Row(
+                                        children: [
+                                          HomeCardLastIncoices(
+                                            title: _controller.getMonth(
+                                                _controller
+                                                    .invoices
+                                                    ?.invoices[index]
+                                                    .dataVencimento),
+                                            price: _controller.formatPrice(
+                                                _controller.invoices
+                                                    ?.invoices[index].valor),
+                                            validity: _controller.getDate(
+                                                _controller
+                                                    .invoices
+                                                    ?.invoices[index]
+                                                    .dataVencimento),
+                                          ),
+                                          const SizedBox(
+                                            width: 16,
+                                          )
+                                        ],
+                                      );
+                                    },
+                                  ),
+                                )
+                              : const SizedBox(
+                                  child: Text(
+                                      "Nenhuma fatura disponível para esse contrato."),
+                                ),
                           (_controller.moreInvoices?.invoices.isNotEmpty ??
                                   false)
                               ? Column(

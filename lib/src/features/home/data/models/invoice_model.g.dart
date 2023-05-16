@@ -15,7 +15,7 @@ InvoiceModel _$InvoiceModelFromJson(Map json) => InvoiceModel(
           ? null
           : DateTime.parse(json['data_vencimento'] as String),
       valor: (json['valor'] as num?)?.toDouble(),
-      situacao: json['situacao'] as String?,
+      situacao: json['codigo_status'] as String?,
       dataInforme: json['data_informe'] == null
           ? null
           : DateTime.parse(json['data_informe'] as String),
@@ -39,7 +39,7 @@ Map<String, dynamic> _$InvoiceModelToJson(InvoiceModel instance) =>
       'documento': instance.documento,
       'data_vencimento': instance.dataVencimento?.toIso8601String(),
       'valor': instance.valor,
-      'situacao': instance.situacao,
+      'codigo_status': instance.situacao,
       'data_informe': instance.dataInforme?.toIso8601String(),
       'data_expira_informe': instance.dataExpiraInforme?.toIso8601String(),
       'data_pagamento': instance.dataPagamento?.toIso8601String(),

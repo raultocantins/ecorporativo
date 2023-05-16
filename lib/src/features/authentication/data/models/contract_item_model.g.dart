@@ -40,6 +40,7 @@ ContractItemModel _$ContractItemModelFromJson(Map json) => ContractItemModel(
           : DateTime.parse(json['data_transferencia'] as String),
       diaVencimento: json['dia_vencimento'] as int?,
       numeroContrato: json['numero_contrato'] as String?,
+      isSigned: json['contrato_assinado'] as bool?,
     );
 
 Map<String, dynamic> _$ContractItemModelToJson(ContractItemModel instance) =>
@@ -61,4 +62,5 @@ Map<String, dynamic> _$ContractItemModelToJson(ContractItemModel instance) =>
       'data_suspensao': instance.dataSuspensao?.toIso8601String(),
       'data_transferencia': instance.dataTransferencia?.toIso8601String(),
       'data_conclusao': instance.dataConclusao?.toIso8601String(),
+      'contrato_assinado': instance.isSigned,
     };

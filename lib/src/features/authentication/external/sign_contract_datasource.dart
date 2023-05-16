@@ -14,7 +14,7 @@ class SignContractDatasourceImpl implements SignContractDatasource {
           "Token c683306d16bf3b9c9aa6b6b360355028b3803bc2";
       dio.options.headers["Content-Type"] = "application/json";
       await dio.post(
-        'https://api-mobile.ecorp-isp.com.br/recursos/assinar_contrato',
+        'https://api-mobile.ecorp-isp.com.br/recursos/assinarContrato/',
         data: {
           "codigo_contrato": contractId,
         },

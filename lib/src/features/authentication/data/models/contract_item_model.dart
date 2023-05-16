@@ -38,7 +38,7 @@ class ContractItemModel {
   @JsonKey(name: "data_conclusao")
   final DateTime? dataConclusao;
   @JsonKey(name: "contrato_assinado")
-  final bool? isSigned;
+  bool? isSigned;
 
   ContractItemModel(
       {required this.id,

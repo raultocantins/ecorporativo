@@ -1,15 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:intl/date_symbol_data_local.dart';
+import 'package:intl/intl.dart';
+import '../../domain/entities/helpdesk_entity.dart';
 
 class SupportCardPreviousCallWidget extends StatelessWidget {
-  final String title;
-  final String date;
-  final String problem;
+  final HelpDeskEntity entity;
+  const SupportCardPreviousCallWidget({required this.entity, super.key});
+  String formatFinishedDate(DateTime date) {
+    initializeDateFormatting();
+    String dateFormatter =
+        DateFormat("dd MMMM yyyy", "pt_BR").format(date.toLocal());
+    return dateFormatter;
+  }
 
-  const SupportCardPreviousCallWidget(
-      {required this.title,
-      required this.date,
-      required this.problem,
-      super.key});
+  shortText(String text) {
+    return (text.length > 40 ? text.substring(0, 40) : text).toLowerCase();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,21 +35,22 @@ class SupportCardPreviousCallWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    title,
+                    'Chamado ${entity.id}',
                     style: TextStyle(
                         fontWeight: FontWeight.w400,
                         color: Theme.of(context).colorScheme.primary,
                         fontSize: 16),
                   ),
                   Text(
-                    date,
+                    formatFinishedDate(
+                        entity.dates.finishDate ?? DateTime.now()),
                     style: TextStyle(
                         color: Colors.grey.shade400, //ADD IN THEME
                         fontSize: 12,
                         fontWeight: FontWeight.w400),
                   ),
                   Text(
-                    problem,
+                    shortText(entity.prognostic.description ?? ""),
                     style: TextStyle(
                         color: Colors.grey.shade400,
                         fontSize: 12,

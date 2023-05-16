@@ -70,11 +70,11 @@ abstract class _AuthControllerBase with Store {
   }
 
   void validateContracts() {
-    List<ContractItemEntity> unsignedContracts = contractsList?.contracts
+    List<ContractItemEntity> contracts = contractsList?.contracts
             .where((element) => element.isSigned != true)
             .toList() ??
         [];
-    if (unsignedContracts.isNotEmpty) {
+    if (contracts.isNotEmpty) {
       NavigationCustom.currentState.pushNamed("/contract_acceptance");
     } else {
       NavigationCustom.currentState.pushNamed("/home");
@@ -112,5 +112,7 @@ abstract class _AuthControllerBase with Store {
   @action
   dispose() {
     isLoading = false;
+    contractsList = null;
+    user = null;
   }
 }

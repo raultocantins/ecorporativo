@@ -2,7 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:ecorporativo/src/features/home/data/models/invoices_model.dart';
 import 'package:ecorporativo/src/features/home/domain/entities/invoices_entity.dart';
 import 'package:ecorporativo/src/features/home/domain/repositories/get_invoices_repository.dart';
-import '../datasources/get_contracts_datasource.dart';
+import '../datasources/get_invoices_datasource.dart';
 
 class GetInvoicesRepositoryImpl implements GetInvoicesRepository {
   final GetInvoicesDatasource getInvoicesDatasource;

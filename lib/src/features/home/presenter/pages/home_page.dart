@@ -45,7 +45,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   }
 
   shortText(String text) {
-    return (text.length > 23 ? text.substring(0, 23) : text).toLowerCase();
+    return (text.length > 18 ? text.substring(0, 18) : text).toLowerCase();
   }
 
   void changeIndexPage(int index) {
@@ -158,7 +158,6 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                               ]),
                         ),
                       ),
-
                       SizedBox(
                         width: double.infinity,
                         height: 300,
@@ -175,42 +174,6 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                               );
                             }),
                       )
-                      // Padding(
-                      //   padding: const EdgeInsets.symmetric(
-                      //       horizontal: 20, vertical: 24),
-                      //   child: Column(
-                      //     crossAxisAlignment: CrossAxisAlignment.start,
-                      //     children: [
-                      //       const Text('Últimas faturas',
-                      //           style: TextStyle(
-                      //               fontSize: 20, fontWeight: FontWeight.w500)),
-                      //       const SizedBox(
-                      //         height: 20,
-                      //       ),
-                      //       SizedBox(
-                      //         height: 400,
-                      //         width: double.infinity,
-                      //         child: ListView.builder(
-                      //           itemCount: 3,
-                      //           itemBuilder: ((context, index) {
-                      //             return Column(
-                      //               children: const [
-                      //                 CardHomeBillCustom(
-                      //                     title: 'Março 2023',
-                      //                     subtitle:
-                      //                         'Plano Residencial Fibra 300 Mb',
-                      //                     color:
-                      //                         Color(0xffF9BD28), //ADD IN THEME
-                      //                     price: Text('R\$ 99.00')),
-                      //                 SizedBox(height: 8)
-                      //               ],
-                      //             );
-                      //           }),
-                      //         ),
-                      //       ),
-                      //     ],
-                      //   ),
-                      // ),
                     ],
                   ),
                 ),
@@ -244,9 +207,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
 
                 break;
               case 3:
-                changeIndexPage(3);
-
-                break;
+                return;
               default:
             }
           },

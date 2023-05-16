@@ -8,10 +8,14 @@ import 'package:ecorporativo/src/features/authentication/external/get_contracts_
 import 'package:ecorporativo/src/features/authentication/external/login_datasource.dart';
 import 'package:ecorporativo/src/features/authentication/external/sign_contract_datasource.dart';
 import 'package:ecorporativo/src/features/authentication/presenter/controller/auth_controller.dart';
+import 'package:ecorporativo/src/features/home/data/repositories/get_helpdesk_repository.dart';
 import 'package:ecorporativo/src/features/home/data/repositories/get_invoices_repository.dart';
+import 'package:ecorporativo/src/features/home/domain/usecases/get_helpdesk_usecase.dart';
 import 'package:ecorporativo/src/features/home/domain/usecases/get_invoices_usecase.dart';
-import 'package:ecorporativo/src/features/home/external/get_contracts_datasource.dart';
+import 'package:ecorporativo/src/features/home/external/get_helpdesk_datasource.dart';
+import 'package:ecorporativo/src/features/home/external/get_invoices_datasource.dart';
 import 'package:ecorporativo/src/features/home/presenter/controllers/invoices_controller.dart';
+import 'package:ecorporativo/src/features/home/presenter/controllers/support_controller.dart';
 
 import 'package:get_it/get_it.dart';
 
@@ -56,6 +60,14 @@ registerDependencies() {
     ),
   );
 
+  getIt.registerLazySingleton<GetHelpDesk>(
+    () => GetHelpDeskImpl(
+      getHelpDeskRepository: GetHelpDeskRepositoryImpl(
+        getHelpDeskDatasource: GetHelpDeskDatasourceImpl(),
+      ),
+    ),
+  );
+
   //AUTH CONTROLLER
   getIt.registerLazySingleton<AuthController>(
     () => AuthController(
@@ -67,5 +79,10 @@ registerDependencies() {
   //INVOICES CONTROLLER
   getIt.registerLazySingleton<InvoicesController>(
     () => InvoicesController(getInvoices: getIt()),
+  );
+
+  //SUPPORT CONTROLLER
+  getIt.registerLazySingleton<SupportController>(
+    () => SupportController(getHelpDeskUsecase: getIt()),
   );
 }

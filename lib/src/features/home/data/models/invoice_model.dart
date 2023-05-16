@@ -15,6 +15,7 @@ class InvoiceModel {
   @JsonKey(name: "data_vencimento")
   final DateTime? dataVencimento;
   final double? valor;
+  @JsonKey(name: "codigo_status")
   final String? situacao;
   @JsonKey(name: "data_informe")
   final DateTime? dataInforme;
