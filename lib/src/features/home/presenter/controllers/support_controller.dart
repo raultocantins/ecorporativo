@@ -19,6 +19,9 @@ abstract class _SupportControllerBase with Store {
   int? userId;
 
   @observable
+  int? contractId;
+
+  @observable
   HelpDeskListEntity? helpDeskListEntity;
 
   List<HelpDeskEntity> get helpDeskListOpened {
@@ -38,6 +41,11 @@ abstract class _SupportControllerBase with Store {
   @action
   changeIsLoading(bool value) {
     isLoading = value;
+  }
+
+  @action
+  changeContractId(int value) {
+    contractId = value;
   }
 
   @action

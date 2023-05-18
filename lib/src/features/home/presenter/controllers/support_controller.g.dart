@@ -41,6 +41,22 @@ mixin _$SupportController on _SupportControllerBase, Store {
     });
   }
 
+  late final _$contractIdAtom =
+      Atom(name: '_SupportControllerBase.contractId', context: context);
+
+  @override
+  int? get contractId {
+    _$contractIdAtom.reportRead();
+    return super.contractId;
+  }
+
+  @override
+  set contractId(int? value) {
+    _$contractIdAtom.reportWrite(value, super.contractId, () {
+      super.contractId = value;
+    });
+  }
+
   late final _$helpDeskListEntityAtom =
       Atom(name: '_SupportControllerBase.helpDeskListEntity', context: context);
 
@@ -66,6 +82,17 @@ mixin _$SupportController on _SupportControllerBase, Store {
         name: '_SupportControllerBase.changeIsLoading');
     try {
       return super.changeIsLoading(value);
+    } finally {
+      _$_SupportControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic changeContractId(int value) {
+    final _$actionInfo = _$_SupportControllerBaseActionController.startAction(
+        name: '_SupportControllerBase.changeContractId');
+    try {
+      return super.changeContractId(value);
     } finally {
       _$_SupportControllerBaseActionController.endAction(_$actionInfo);
     }
@@ -109,6 +136,7 @@ mixin _$SupportController on _SupportControllerBase, Store {
     return '''
 isLoading: ${isLoading},
 userId: ${userId},
+contractId: ${contractId},
 helpDeskListEntity: ${helpDeskListEntity}
     ''';
   }

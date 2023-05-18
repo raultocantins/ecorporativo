@@ -25,6 +25,8 @@ class _SupportPageState extends State<SupportPage> {
     super.initState();
     controller = GetIt.I.get<SupportController>();
     authController = GetIt.I.get<AuthController>();
+    controller
+        .changeContractId(authController.contractsList?.contracts[0].id ?? 0);
     controller.getHelpDesk(authController.user?.id);
   }
 
@@ -53,8 +55,9 @@ class _SupportPageState extends State<SupportPage> {
                       color: Theme.of(context).colorScheme.primary,
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 20),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
                               'Seus chamados ',

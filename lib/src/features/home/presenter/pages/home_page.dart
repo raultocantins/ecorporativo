@@ -103,79 +103,83 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             controller: tabController,
             physics: const NeverScrollableScrollPhysics(),
             children: [
-              SingleChildScrollView(
-                child: SizedBox(
-                  child: Column(
-                    children: [
-                      Container(
-                        height: 250,
-                        width: double.infinity,
-                        color: Theme.of(context).colorScheme.primary,
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 20),
-                          child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const SizedBox(
-                                  height: 30,
-                                ),
-                                Text(
-                                  'Como podemos te ajudar?',
-                                  style: TextStyle(
-                                      fontSize: 24,
-                                      fontWeight: FontWeight.w500,
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .background),
-                                ),
-                                const SizedBox(
-                                  height: 32,
-                                ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    HomeCardCustom(
-                                        title: 'Ver minhas\nfaturas',
-                                        onTap: () => changeIndexPage(1),
-                                        image: SvgPicture.asset(
-                                          'assets/images/Vector.svg',
-                                          height: 26,
-                                          width: 24,
-                                        )),
-                                    const SizedBox(
-                                      width: 10,
-                                    ),
-                                    HomeCardCustom(
-                                        title: 'Solicitar suporte\ntécnico',
-                                        onTap: () => changeIndexPage(2),
-                                        image: SvgPicture.asset(
-                                          'assets/images/settings.svg',
-                                          height: 26,
-                                          width: 24,
-                                        )),
-                                  ],
-                                ),
-                              ]),
+              SizedBox(
+                child: Column(
+                  children: [
+                    Container(
+                      height: 250,
+                      width: double.infinity,
+                      color: Theme.of(context).colorScheme.primary,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const SizedBox(
+                                height: 30,
+                              ),
+                              Text(
+                                'Como podemos te ajudar?',
+                                style: TextStyle(
+                                    fontSize: 24,
+                                    fontWeight: FontWeight.w500,
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .background),
+                              ),
+                              const SizedBox(
+                                height: 32,
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  HomeCardCustom(
+                                      title: 'Ver minhas\nfaturas',
+                                      onTap: () => changeIndexPage(1),
+                                      image: SvgPicture.asset(
+                                        'assets/images/Vector.svg',
+                                        height: 26,
+                                        width: 24,
+                                      )),
+                                  const SizedBox(
+                                    width: 10,
+                                  ),
+                                  HomeCardCustom(
+                                      title: 'Solicitar suporte\ntécnico',
+                                      onTap: () => changeIndexPage(2),
+                                      image: SvgPicture.asset(
+                                        'assets/images/settings.svg',
+                                        height: 26,
+                                        width: 24,
+                                      )),
+                                ],
+                              ),
+                            ]),
+                      ),
+                    ),
+                    Expanded(
+                      child: Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              "Em breve, novo recurso!",
+                              style: TextStyle(
+                                  color: Colors.grey.shade300, fontSize: 20),
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            Icon(
+                              Icons.auto_mode_rounded,
+                              size: 50,
+                              color: Colors.grey.shade200,
+                            ),
+                          ],
                         ),
                       ),
-                      SizedBox(
-                        width: double.infinity,
-                        height: 300,
-                        child: ListView.builder(
-                            itemCount: authController
-                                    .contractsList?.contracts.length ??
-                                0,
-                            itemBuilder: (context, i) {
-                              return ListTile(
-                                title: Text(authController
-                                        .contractsList?.contracts[i].id
-                                        .toString() ??
-                                    ""),
-                              );
-                            }),
-                      )
-                    ],
-                  ),
+                    )
+                  ],
                 ),
               ),
               const InvoicesPage(),

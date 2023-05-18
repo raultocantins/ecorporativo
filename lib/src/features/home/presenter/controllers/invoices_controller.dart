@@ -25,6 +25,13 @@ abstract class _InvoicesControllerBase with Store {
   @observable
   InvoicesEntity? moreInvoices;
 
+  List<InvoiceEntity>? get invoicesOpening {
+    return invoices?.invoices
+            .where((element) => element.situacao == "Aberto")
+            .toList() ??
+        [];
+  }
+
   @action
   changeIsLoading(bool value) {
     isLoading = value;
@@ -48,7 +55,6 @@ abstract class _InvoicesControllerBase with Store {
 
   fetchInvoices() async {
     changeIsLoading(true);
-    cleanInvoices();
     var result = await getInvoices(contractId: contractId ?? 0);
     result.fold((l) => null, (r) {
       if (r.invoices.length > 3) {
@@ -60,11 +66,6 @@ abstract class _InvoicesControllerBase with Store {
       }
     });
     changeIsLoading(false);
-  }
-
-  void cleanInvoices() {
-    invoices = null;
-    moreInvoices = null;
   }
 
   String getDate(DateTime? date) {

@@ -51,9 +51,25 @@ class _InvoicesPageState extends State<InvoicesPage> {
                       color: Theme.of(context).colorScheme.primary,
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 20),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
+                            SizedBox(
+                              width: 200,
+                              child: Text(
+                                _authController.contractsList?.contracts
+                                        .where((element) =>
+                                            element.id ==
+                                            _controller.contractId)
+                                        .first
+                                        .status ??
+                                    "",
+                                style: const TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 20), //  ADD IN THEME
+                              ),
+                            ),
                             DropdownButton(
                               value: _controller.contractId,
                               elevation: 0,
@@ -82,13 +98,6 @@ class _InvoicesPageState extends State<InvoicesPage> {
                                 _controller.changeContractId(i as int);
                               },
                             ),
-                            Text(
-                              _authController
-                                      .contractsList?.contracts[0].status ??
-                                  "",
-                              style: TextStyle(
-                                  color: Colors.grey.shade400), //  ADD IN THEME
-                            )
                           ],
                         ),
                       ),
@@ -102,12 +111,13 @@ class _InvoicesPageState extends State<InvoicesPage> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          (_controller.invoices?.invoices
-                                      .where((element) =>
-                                          element.situacao == "B" ||
-                                          element.situacao == "C")
-                                      .isNotEmpty ??
-                                  false)
+                          ((_authController.contractsList?.contracts
+                                          .where((element) =>
+                                              element.id ==
+                                              _controller.contractId)
+                                          .first)
+                                      ?.status ==
+                                  "Bloqueado financeiramente")
                               ? Column(
                                   children: [
                                     Container(
