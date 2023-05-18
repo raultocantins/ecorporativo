@@ -1,8 +1,12 @@
 import 'package:ecorporativo/src/features/home/domain/entities/invoice_entity.dart';
 import 'package:ecorporativo/src/features/home/domain/entities/invoices_entity.dart';
 import 'package:ecorporativo/src/features/home/domain/usecases/get_invoices_usecase.dart';
+import 'package:ecorporativo/src/features/home/domain/usecases/trust_release_usecase.dart';
 import 'package:ecorporativo/src/shared/utils/date_format.dart';
+import 'package:flutter/widgets.dart';
 import 'package:mobx/mobx.dart';
+
+import '../../../../shared/utils/alerts.dart';
 
 part 'invoices_controller.g.dart';
 
@@ -11,7 +15,9 @@ class InvoicesController = _InvoicesControllerBase with _$InvoicesController;
 
 abstract class _InvoicesControllerBase with Store {
   GetInvoices getInvoices;
-  _InvoicesControllerBase({required this.getInvoices});
+  TrustRelease trustRelease;
+  _InvoicesControllerBase(
+      {required this.getInvoices, required this.trustRelease});
 
   @observable
   bool isLoading = false;
@@ -24,13 +30,6 @@ abstract class _InvoicesControllerBase with Store {
 
   @observable
   InvoicesEntity? moreInvoices;
-
-  List<InvoiceEntity>? get invoicesOpening {
-    return invoices?.invoices
-            .where((element) => element.situacao == "Aberto")
-            .toList() ??
-        [];
-  }
 
   @action
   changeIsLoading(bool value) {
@@ -55,7 +54,9 @@ abstract class _InvoicesControllerBase with Store {
 
   fetchInvoices() async {
     changeIsLoading(true);
-    var result = await getInvoices(contractId: contractId ?? 0);
+    clearInvoices();
+
+    var result = await getInvoices(contractId: contractId!);
     result.fold((l) => null, (r) {
       if (r.invoices.length > 3) {
         List<InvoiceEntity> newlist = r.invoices.sublist(3, r.invoices.length);
@@ -66,6 +67,23 @@ abstract class _InvoicesControllerBase with Store {
       }
     });
     changeIsLoading(false);
+  }
+
+  trustReleaseContract(BuildContext context) async {
+    changeIsLoading(true);
+    final result = await trustRelease(contractId: contractId ?? 0);
+    result.fold((l) => null, (r) {
+      fetchInvoices();
+      AlertsCustom.success(context,
+          title: "Contrato desbloqueado",
+          message: "liberação de confiança efetuada com sucesso.");
+    });
+    changeIsLoading(false);
+  }
+
+  clearInvoices() {
+    invoices = null;
+    moreInvoices = null;
   }
 
   String getDate(DateTime? date) {

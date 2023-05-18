@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+
+import '../../../../shared/utils/alerts.dart';
 
 class CardHomeBillCustom extends StatelessWidget {
   final String title;
   final String subtitle;
   final Widget price;
-  final Color? color;
   final String status;
+  final String? linhaDigitavel;
   const CardHomeBillCustom(
       {required this.title,
       required this.subtitle,
       required this.price,
       required this.status,
-      this.color,
+      this.linhaDigitavel,
       super.key});
 
   @override
@@ -27,7 +30,9 @@ class CardHomeBillCustom extends StatelessWidget {
         leading: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(12),
-            color: color,
+            color: status == "Pago"
+                ? const Color(0xff4CAF50)
+                : const Color(0xffF9BD28),
           ),
           height: 41,
           width: 4,
@@ -41,10 +46,35 @@ class CardHomeBillCustom extends StatelessWidget {
             style: TextStyle(color: Colors.grey.shade400, fontSize: 12)),
         trailing: Column(
           mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             price,
-            Text(status,
-                style: TextStyle(color: Colors.grey.shade400, fontSize: 12))
+            status == "Aberto"
+                ? SizedBox(
+                    height: 25,
+                    child: TextButton(
+                        onPressed: () {
+                          Clipboard.setData(
+                              ClipboardData(text: linhaDigitavel));
+                          AlertsCustom.success(context,
+                              title: "Boleto copiado",
+                              message:
+                                  "o código já foi copiado para área de transferência");
+                        },
+                        style: ButtonStyle(
+                            padding: MaterialStateProperty.all(
+                                const EdgeInsets.all(0)),
+                            elevation: MaterialStateProperty.all(0)),
+                        child: const Text("Copiar código de barras",
+                            style:
+                                TextStyle(color: Colors.black, fontSize: 12))),
+                  )
+                : SizedBox(
+                    height: 25,
+                    child: Text(status,
+                        style: TextStyle(
+                            color: Colors.grey.shade400, fontSize: 12)),
+                  )
           ],
         ),
       ),

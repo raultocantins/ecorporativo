@@ -10,10 +10,13 @@ import 'package:ecorporativo/src/features/authentication/external/sign_contract_
 import 'package:ecorporativo/src/features/authentication/presenter/controller/auth_controller.dart';
 import 'package:ecorporativo/src/features/home/data/repositories/get_helpdesk_repository.dart';
 import 'package:ecorporativo/src/features/home/data/repositories/get_invoices_repository.dart';
+import 'package:ecorporativo/src/features/home/data/repositories/trust_release_repository.dart';
 import 'package:ecorporativo/src/features/home/domain/usecases/get_helpdesk_usecase.dart';
 import 'package:ecorporativo/src/features/home/domain/usecases/get_invoices_usecase.dart';
+import 'package:ecorporativo/src/features/home/domain/usecases/trust_release_usecase.dart';
 import 'package:ecorporativo/src/features/home/external/get_helpdesk_datasource.dart';
 import 'package:ecorporativo/src/features/home/external/get_invoices_datasource.dart';
+import 'package:ecorporativo/src/features/home/external/trust_release_datasource.dart';
 import 'package:ecorporativo/src/features/home/presenter/controllers/invoices_controller.dart';
 import 'package:ecorporativo/src/features/home/presenter/controllers/support_controller.dart';
 
@@ -68,6 +71,13 @@ registerDependencies() {
     ),
   );
 
+  getIt.registerLazySingleton<TrustRelease>(
+    () => TrustReleaseImpl(
+        trustReleaseRepository: TrustReleaseRepositoryImpl(
+      trustReleaseDatasource: TrustReleaseDatasourceImpl(),
+    )),
+  );
+
   //AUTH CONTROLLER
   getIt.registerLazySingleton<AuthController>(
     () => AuthController(
@@ -78,7 +88,7 @@ registerDependencies() {
 
   //INVOICES CONTROLLER
   getIt.registerLazySingleton<InvoicesController>(
-    () => InvoicesController(getInvoices: getIt()),
+    () => InvoicesController(getInvoices: getIt(), trustRelease: getIt()),
   );
 
   //SUPPORT CONTROLLER

@@ -6,7 +6,6 @@ part 'invoice_model.g.dart';
 
 @JsonSerializable(explicitToJson: true, anyMap: true)
 class InvoiceModel {
-  final int id;
   @JsonKey(name: "codigo_cliente")
   final int? codigoCliente;
   @JsonKey(name: "codigo_registro")
@@ -15,8 +14,7 @@ class InvoiceModel {
   @JsonKey(name: "data_vencimento")
   final DateTime? dataVencimento;
   final double? valor;
-  @JsonKey(name: "codigo_status")
-  final String? situacao;
+  final String situacao;
   @JsonKey(name: "data_informe")
   final DateTime? dataInforme;
   @JsonKey(name: "data_expira_informe")
@@ -33,13 +31,12 @@ class InvoiceModel {
   final int? codigoDesdobramento;
 
   InvoiceModel({
-    required this.id,
+    required this.situacao,
     this.codigoCliente,
     this.codigoRegistro,
     this.documento,
     this.dataVencimento,
     this.valor,
-    this.situacao,
     this.dataInforme,
     this.dataExpiraInforme,
     this.dataPagamento,
@@ -54,7 +51,6 @@ class InvoiceModel {
 
   static InvoiceEntity toEntity(InvoiceModel model) {
     return InvoiceEntity(
-      id: model.id,
       codigoCliente: model.codigoCliente,
       codigoDesdobramento: model.codigoDesdobramento,
       codigoRegistro: model.codigoRegistro,
@@ -73,7 +69,6 @@ class InvoiceModel {
 
   static InvoiceModel toModel(InvoiceEntity entity) {
     return InvoiceModel(
-      id: entity.id,
       codigoCliente: entity.codigoCliente,
       codigoDesdobramento: entity.codigoDesdobramento,
       codigoRegistro: entity.codigoRegistro,

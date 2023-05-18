@@ -181,7 +181,10 @@ class _InvoicesPageState extends State<InvoicesPage> {
                                       mainAxisAlignment: MainAxisAlignment.end,
                                       children: [
                                         ElevatedButton(
-                                          onPressed: () {},
+                                          onPressed: () {
+                                            _controller
+                                                .trustReleaseContract(context);
+                                          },
                                           style: ButtonStyle(
                                               fixedSize:
                                                   MaterialStateProperty.all(
@@ -230,6 +233,15 @@ class _InvoicesPageState extends State<InvoicesPage> {
                                       return Row(
                                         children: [
                                           HomeCardLastIncoices(
+                                            linhaDigitavel: _controller
+                                                .invoices
+                                                ?.invoices[index]
+                                                .linhaDigitavel,
+                                            status: _controller
+                                                    .invoices
+                                                    ?.invoices[index]
+                                                    .situacao ??
+                                                "",
                                             title: _controller.getMonth(
                                                 _controller
                                                     .invoices
@@ -272,14 +284,12 @@ class _InvoicesPageState extends State<InvoicesPage> {
                                       padding:
                                           const EdgeInsets.only(bottom: 20),
                                       child: SizedBox(
-                                        height: 350,
+                                        height: 400,
                                         width: double.infinity,
                                         child: ListView.builder(
                                           itemCount: _controller.moreInvoices
                                                   ?.invoices.length ??
                                               0,
-                                          physics:
-                                              const NeverScrollableScrollPhysics(),
                                           itemBuilder: ((context, index) {
                                             return Column(
                                               children: [
@@ -289,10 +299,11 @@ class _InvoicesPageState extends State<InvoicesPage> {
                                                           .moreInvoices
                                                           ?.invoices[index]
                                                           .dataVencimento),
-                                                  subtitle:
-                                                      'Plano Residencial Fibra 300 Mb',
-                                                  color: const Color(
-                                                      0xffF9BD28), //ADD IN THEME
+                                                  subtitle: _controller.getDate(
+                                                      _controller
+                                                          .moreInvoices
+                                                          ?.invoices[index]
+                                                          .dataVencimento),
                                                   price: Text(
                                                       'R\$ ${_controller.formatPrice(_controller.moreInvoices?.invoices[index].valor)}'),
                                                   status: _controller
@@ -302,31 +313,6 @@ class _InvoicesPageState extends State<InvoicesPage> {
                                                       "",
                                                 ),
                                                 const SizedBox(height: 8),
-                                                index == 3
-                                                    ? Column(
-                                                        children: [
-                                                          Row(
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .end,
-                                                            children: [
-                                                              TextButton(
-                                                                onPressed: () {
-                                                                  Navigator.of(
-                                                                          context)
-                                                                      .pushNamed(
-                                                                          "/invoices-choose-date");
-                                                                },
-                                                                child:
-                                                                    const Text(
-                                                                  'Ver mais',
-                                                                ),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                        ],
-                                                      )
-                                                    : Container(),
                                               ],
                                             );
                                           }),

@@ -1,4 +1,5 @@
 import 'package:ecorporativo/src/features/authentication/presenter/controller/auth_controller.dart';
+import 'package:ecorporativo/src/features/home/presenter/widgets/open_call_bottomsheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_svg/svg.dart';
@@ -151,7 +152,17 @@ class _SupportPageState extends State<SupportPage> {
                           ButtonCustomWidget(
                             height: 48,
                             width: double.infinity,
-                            onPressed: () {},
+                            onPressed: () {
+                              showModalBottomSheet(
+                                  context: context,
+                                  isScrollControlled: true,
+                                  shape: const RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.only(
+                                          topLeft: Radius.circular(20),
+                                          topRight: Radius.circular(20))),
+                                  builder: (context) =>
+                                      const OpenCallBottomSheet());
+                            },
                             title: 'Abrir novo chamado',
                             fontSize: 16,
                           ),

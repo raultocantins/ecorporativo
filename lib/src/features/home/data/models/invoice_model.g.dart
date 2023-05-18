@@ -7,7 +7,7 @@ part of 'invoice_model.dart';
 // **************************************************************************
 
 InvoiceModel _$InvoiceModelFromJson(Map json) => InvoiceModel(
-      id: json['id'] as int,
+      situacao: json['situacao'] as String,
       codigoCliente: json['codigo_cliente'] as int?,
       codigoRegistro: json['codigo_registro'] as int?,
       documento: json['documento'] as String?,
@@ -15,7 +15,6 @@ InvoiceModel _$InvoiceModelFromJson(Map json) => InvoiceModel(
           ? null
           : DateTime.parse(json['data_vencimento'] as String),
       valor: (json['valor'] as num?)?.toDouble(),
-      situacao: json['codigo_status'] as String?,
       dataInforme: json['data_informe'] == null
           ? null
           : DateTime.parse(json['data_informe'] as String),
@@ -33,13 +32,12 @@ InvoiceModel _$InvoiceModelFromJson(Map json) => InvoiceModel(
 
 Map<String, dynamic> _$InvoiceModelToJson(InvoiceModel instance) =>
     <String, dynamic>{
-      'id': instance.id,
       'codigo_cliente': instance.codigoCliente,
       'codigo_registro': instance.codigoRegistro,
       'documento': instance.documento,
       'data_vencimento': instance.dataVencimento?.toIso8601String(),
       'valor': instance.valor,
-      'codigo_status': instance.situacao,
+      'situacao': instance.situacao,
       'data_informe': instance.dataInforme?.toIso8601String(),
       'data_expira_informe': instance.dataExpiraInforme?.toIso8601String(),
       'data_pagamento': instance.dataPagamento?.toIso8601String(),

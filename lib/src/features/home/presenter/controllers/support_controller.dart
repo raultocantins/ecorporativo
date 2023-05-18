@@ -65,6 +65,8 @@ abstract class _SupportControllerBase with Store {
     changeIsLoading(false);
   }
 
+  createHelpDesk() async {}
+
   @action
   dispose() {
     isLoading = false;
