@@ -1,5 +1,6 @@
 import 'package:ecorporativo/src/features/authentication/presenter/controller/auth_controller.dart';
 import 'package:ecorporativo/src/features/home/presenter/pages/invoices_page.dart';
+import 'package:ecorporativo/src/features/home/presenter/pages/profile_page.dart';
 import 'package:ecorporativo/src/features/home/presenter/pages/support_page.dart';
 import 'package:ecorporativo/src/features/home/presenter/widgets/home_card_custom.dart';
 import 'package:flutter/material.dart';
@@ -184,11 +185,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
               ),
               const InvoicesPage(),
               const SupportPage(),
-              const SizedBox(
-                child: Center(
-                  child: Text("quarta pagina"),
-                ),
-              )
+              const ProfilePage()
             ],
           ),
         ),
@@ -211,6 +208,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
 
                 break;
               case 3:
+                changeIndexPage(3);
                 return;
               default:
             }
