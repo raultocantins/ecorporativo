@@ -11,14 +11,17 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   late AuthController authController;
-  late TextEditingController textEditingController;
+  late TextEditingController nameEditingController;
+  late TextEditingController documentEditingController;
 
   @override
   void initState() {
     super.initState();
     authController = GetIt.I.get<AuthController>();
-    textEditingController =
+    nameEditingController =
         TextEditingController(text: authController.user?.fullname ?? "");
+    documentEditingController =
+        TextEditingController(text: "29.586.340/0001-28");
   }
 
   @override
@@ -26,40 +29,30 @@ class _ProfilePageState extends State<ProfilePage> {
     return Column(
       children: [
         Stack(
-          alignment: Alignment.center,
+          alignment: Alignment.topCenter,
           children: [
-            Column(
-              children: [
-                Container(
-                  height: 100,
-                  width: double.infinity,
-                  color: Theme.of(context).colorScheme.primary,
-                ),
-                Container(
-                  height: 100,
-                  width: double.infinity,
-                  color: Theme.of(context).colorScheme.background,
-                ),
-              ],
+            Container(
+              height: 80,
+              width: double.infinity,
+              color: Theme.of(context).colorScheme.primary,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SizedBox(
-                  height: 120,
-                  width: 120,
-                  child: CircleAvatar(
-                    backgroundColor: Theme.of(context).colorScheme.secondary,
-                    child: const Icon(
-                      Icons.person,
-                      size: 70,
-                      color: Colors.white,
-                    ),
-                  ),
+            Positioned(
+                child: SizedBox(
+              height: 120,
+              width: 120,
+              child: CircleAvatar(
+                backgroundColor: Theme.of(context).colorScheme.secondary,
+                child: const Icon(
+                  Icons.person,
+                  size: 70,
+                  color: Colors.white,
                 ),
-              ],
-            )
+              ),
+            ))
           ],
+        ),
+        const SizedBox(
+          height: 48,
         ),
         Padding(
           padding: const EdgeInsets.symmetric(
@@ -68,10 +61,28 @@ class _ProfilePageState extends State<ProfilePage> {
           child: Column(
             children: [
               TextField(
-                controller: textEditingController,
+                controller: nameEditingController,
                 readOnly: true,
                 decoration: const InputDecoration(
                   labelText: 'Nome',
+                  filled: true,
+                  labelStyle: TextStyle(color: Colors.grey),
+                  enabledBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(width: 1, color: Colors.grey),
+                  ),
+                  focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(width: 1, color: Colors.grey),
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 24,
+              ),
+              TextField(
+                controller: documentEditingController,
+                readOnly: true,
+                decoration: const InputDecoration(
+                  labelText: 'Documento',
                   filled: true,
                   labelStyle: TextStyle(color: Colors.grey),
                   enabledBorder: UnderlineInputBorder(
