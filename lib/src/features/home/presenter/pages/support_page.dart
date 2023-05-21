@@ -28,7 +28,8 @@ class _SupportPageState extends State<SupportPage> {
     authController = GetIt.I.get<AuthController>();
     controller
         .changeContractId(authController.contractsList?.contracts[0].id ?? 0);
-    controller.getHelpDesk(authController.user?.id);
+    controller.changeUserId(authController.user!.id);
+    controller.getHelpDesk();
   }
 
   @override
@@ -108,13 +109,13 @@ class _SupportPageState extends State<SupportPage> {
                                                   .helpDeskListOpened[i],
                                             );
                                           }),
-                                    )
+                                    ),
+                                    const SizedBox(
+                                      height: 20,
+                                    ),
                                   ],
                                 )
                               : Container(),
-                          const SizedBox(
-                            height: 20,
-                          ),
                           Text(
                             'Chamados anteriores',
                             style: TextStyle(
@@ -125,27 +126,32 @@ class _SupportPageState extends State<SupportPage> {
                           const SizedBox(
                             height: 8,
                           ),
-                          SizedBox(
-                            height: 230,
-                            width: double.infinity,
-                            child: ListView.builder(
-                              itemCount:
-                                  controller.helpDeskListFinalized.length,
-                              itemBuilder: (context, i) {
-                                return Column(
-                                  children: [
-                                    SupportCardPreviousCallWidget(
-                                      entity:
-                                          controller.helpDeskListFinalized[i],
-                                    ),
-                                    const SizedBox(
-                                      height: 8,
-                                    )
-                                  ],
-                                );
-                              },
-                            ),
-                          ),
+                          (controller.helpDeskListFinalized.isNotEmpty)
+                              ? SizedBox(
+                                  height: 230,
+                                  width: double.infinity,
+                                  child: ListView.builder(
+                                    itemCount:
+                                        controller.helpDeskListFinalized.length,
+                                    itemBuilder: (context, i) {
+                                      return Column(
+                                        children: [
+                                          SupportCardPreviousCallWidget(
+                                            entity: controller
+                                                .helpDeskListFinalized[i],
+                                          ),
+                                          const SizedBox(
+                                            height: 8,
+                                          )
+                                        ],
+                                      );
+                                    },
+                                  ),
+                                )
+                              : const SizedBox(
+                                  height: 230,
+                                  child: Text("Nenhum chamado encontrado."),
+                                ),
                           const SizedBox(
                             height: 32,
                           ),

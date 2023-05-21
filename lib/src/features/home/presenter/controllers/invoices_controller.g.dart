@@ -73,6 +73,22 @@ mixin _$InvoicesController on _InvoicesControllerBase, Store {
     });
   }
 
+  late final _$userAtom =
+      Atom(name: '_InvoicesControllerBase.user', context: context);
+
+  @override
+  UserEntity? get user {
+    _$userAtom.reportRead();
+    return super.user;
+  }
+
+  @override
+  set user(UserEntity? value) {
+    _$userAtom.reportWrite(value, super.user, () {
+      super.user = value;
+    });
+  }
+
   late final _$_InvoicesControllerBaseActionController =
       ActionController(name: '_InvoicesControllerBase', context: context);
 
@@ -110,6 +126,17 @@ mixin _$InvoicesController on _InvoicesControllerBase, Store {
   }
 
   @override
+  dynamic changeUser(UserEntity value) {
+    final _$actionInfo = _$_InvoicesControllerBaseActionController.startAction(
+        name: '_InvoicesControllerBase.changeUser');
+    try {
+      return super.changeUser(value);
+    } finally {
+      _$_InvoicesControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   dynamic changeContractId(int value) {
     final _$actionInfo = _$_InvoicesControllerBaseActionController.startAction(
         name: '_InvoicesControllerBase.changeContractId');
@@ -137,7 +164,8 @@ mixin _$InvoicesController on _InvoicesControllerBase, Store {
 isLoading: ${isLoading},
 contractId: ${contractId},
 invoices: ${invoices},
-moreInvoices: ${moreInvoices}
+moreInvoices: ${moreInvoices},
+user: ${user}
     ''';
   }
 }

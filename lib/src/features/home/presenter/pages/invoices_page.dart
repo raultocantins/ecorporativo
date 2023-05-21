@@ -24,7 +24,8 @@ class _InvoicesPageState extends State<InvoicesPage> {
     _controller = GetIt.I.get<InvoicesController>();
     _authController = GetIt.I.get<AuthController>();
     _controller
-        .changeContractId(_authController.contractsList?.contracts[0].id ?? 0);
+        .changeContractId(_authController.contractsList!.contracts[0].id);
+    _controller.changeUser(_authController.user!);
     _controller.fetchInvoices();
   }
 

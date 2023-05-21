@@ -1,4 +1,5 @@
 import 'package:ecorporativo/src/features/home/domain/entities/helpdesk_list_entity.dart';
+import 'package:ecorporativo/src/features/home/domain/usecases/create_helpdesk_usecase.dart';
 import 'package:ecorporativo/src/features/home/domain/usecases/get_helpdesk_usecase.dart';
 import 'package:mobx/mobx.dart';
 import '../../domain/entities/helpdesk_entity.dart';
@@ -10,7 +11,9 @@ class SupportController = _SupportControllerBase with _$SupportController;
 
 abstract class _SupportControllerBase with Store {
   GetHelpDesk getHelpDeskUsecase;
-  _SupportControllerBase({required this.getHelpDeskUsecase});
+  CreateHelpDesk createHelpDeskUsecase;
+  _SupportControllerBase(
+      {required this.getHelpDeskUsecase, required this.createHelpDeskUsecase});
 
   @observable
   bool isLoading = false;
@@ -58,14 +61,27 @@ abstract class _SupportControllerBase with Store {
     userId = value;
   }
 
-  getHelpDesk(int? userId) async {
+  getHelpDesk() async {
     changeIsLoading(true);
-    final result = await getHelpDeskUsecase(userId: userId ?? 0);
+    final result = await getHelpDeskUsecase(userId: userId!);
     result.fold((l) => null, (r) => changeHelpDesk(r));
     changeIsLoading(false);
   }
 
-  createHelpDesk() async {}
+  createHelpDesk({
+    required int contractId,
+    required int contractItem,
+    required int service,
+    required int prognostic,
+  }) async {
+    // final result = await createHelpDeskUsecase(
+    //     contractId: contractId,
+    //     contractItem: contractItem,
+    //     service: service,
+    //     prognostic: prognostic,
+    //     userId: userId!);
+    getHelpDesk();
+  }
 
   @action
   dispose() {

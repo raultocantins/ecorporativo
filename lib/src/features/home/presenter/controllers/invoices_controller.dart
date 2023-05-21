@@ -1,3 +1,4 @@
+import 'package:ecorporativo/src/features/authentication/domain/entities/user_entity.dart';
 import 'package:ecorporativo/src/features/home/domain/entities/invoice_entity.dart';
 import 'package:ecorporativo/src/features/home/domain/entities/invoices_entity.dart';
 import 'package:ecorporativo/src/features/home/domain/usecases/get_invoices_usecase.dart';
@@ -31,6 +32,9 @@ abstract class _InvoicesControllerBase with Store {
   @observable
   InvoicesEntity? moreInvoices;
 
+  @observable
+  UserEntity? user;
+
   @action
   changeIsLoading(bool value) {
     isLoading = value;
@@ -44,6 +48,11 @@ abstract class _InvoicesControllerBase with Store {
   @action
   changeMoreInvoices(InvoicesEntity value) {
     moreInvoices = value;
+  }
+
+  @action
+  changeUser(UserEntity value) {
+    user = value;
   }
 
   @action
@@ -71,7 +80,7 @@ abstract class _InvoicesControllerBase with Store {
 
   trustReleaseContract(BuildContext context) async {
     changeIsLoading(true);
-    final result = await trustRelease(contractId: contractId ?? 0);
+    final result = await trustRelease(contractId: contractId!, user: user!);
     result.fold((l) => null, (r) {
       fetchInvoices();
       AlertsCustom.success(context,
