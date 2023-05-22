@@ -131,29 +131,32 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                               const SizedBox(
                                 height: 32,
                               ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  HomeCardCustom(
-                                      title: 'Ver minhas\nfaturas',
-                                      onTap: () => changeIndexPage(1),
-                                      image: SvgPicture.asset(
-                                        'assets/images/Vector.svg',
-                                        height: 26,
-                                        width: 24,
-                                      )),
-                                  const SizedBox(
-                                    width: 10,
-                                  ),
-                                  HomeCardCustom(
-                                      title: 'Solicitar suporte\ntécnico',
-                                      onTap: () => changeIndexPage(2),
-                                      image: SvgPicture.asset(
-                                        'assets/images/settings.svg',
-                                        height: 26,
-                                        width: 24,
-                                      )),
-                                ],
+                              SingleChildScrollView(
+                                scrollDirection: Axis.horizontal,
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    HomeCardCustom(
+                                        title: 'Ver minhas\nfaturas',
+                                        onTap: () => changeIndexPage(1),
+                                        image: SvgPicture.asset(
+                                          'assets/images/Vector.svg',
+                                          height: 26,
+                                          width: 24,
+                                        )),
+                                    const SizedBox(
+                                      width: 10,
+                                    ),
+                                    HomeCardCustom(
+                                        title: 'Solicitar suporte\ntécnico',
+                                        onTap: () => changeIndexPage(2),
+                                        image: SvgPicture.asset(
+                                          'assets/images/settings.svg',
+                                          height: 26,
+                                          width: 24,
+                                        )),
+                                  ],
+                                ),
                               ),
                             ]),
                       ),

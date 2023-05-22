@@ -20,7 +20,7 @@ class HomeCardCustom extends StatelessWidget {
             color: Theme.of(context).colorScheme.onPrimaryContainer,
             borderRadius: BorderRadius.circular(12)),
         height: 120,
-        width: 180,
+        width: 170,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
