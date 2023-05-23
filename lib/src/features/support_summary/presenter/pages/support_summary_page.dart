@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../home/presenter/widgets/home_card_last_invoices.dart';
+
 class SupportSummaryPage extends StatefulWidget {
   const SupportSummaryPage({super.key});
 
@@ -55,16 +57,127 @@ class _SupportSummaryPageState extends State<SupportSummaryPage> {
             ),
           ),
           const SizedBox(
-            height: 48,
+            height: 30,
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Card(
+              elevation: 2,
+              child: Container(
+                  width: double.infinity,
+                  color: Theme.of(context).colorScheme.background,
+                  child: Padding(
+                    padding: const EdgeInsets.all(20),
+                    child: Column(
+                      children: [
+                        Row(
+                          children: [
+                            Text(
+                              "Data do abetura: ",
+                              style: TextStyle(
+                                fontSize: 14,
+                                color: Theme.of(context).colorScheme.primary,
+                              ),
+                            ),
+                            const Expanded(child: SizedBox()),
+                            Text(
+                              "11/12/2023",
+                              style: TextStyle(
+                                fontSize: 14,
+                                color: Theme.of(context).colorScheme.primary,
+                              ),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Text(
+                              "Data do atendimento: ",
+                              style: TextStyle(
+                                fontSize: 14,
+                                color: Theme.of(context).colorScheme.primary,
+                              ),
+                            ),
+                            const Expanded(child: SizedBox()),
+                            Text(
+                              "11/12/2023",
+                              style: TextStyle(
+                                fontSize: 14,
+                                color: Theme.of(context).colorScheme.primary,
+                              ),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Text(
+                              "Data de finalização:",
+                              style: TextStyle(
+                                fontSize: 14,
+                                color: Theme.of(context).colorScheme.primary,
+                              ),
+                            ),
+                            const Expanded(child: SizedBox()),
+                            Text(
+                              "11/12/2023",
+                              style: TextStyle(
+                                fontSize: 14,
+                                color: Theme.of(context).colorScheme.primary,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  )),
+            ),
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          Row(
+            children: [
+              Container(
+                height: 2,
+                width: 100,
+                color: Colors.grey,
+              ),
+              const Expanded(child: SizedBox()),
+              const Text('//////////////'),
+              const Expanded(child: SizedBox()),
+              Container(
+                height: 2,
+                width: 100,
+                color: Colors.grey,
+              ),
+            ],
+          ),
+          const SizedBox(
+            height: 15,
           ),
           Expanded(
-            child: ListView.builder(
-                itemCount: 10,
-                itemBuilder: (context, i) {
-                  return const ListTile(
-                    title: Text("asdasdasd"),
-                  );
-                }),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: ListView.builder(
+                  itemCount: 10,
+                  itemBuilder: (context, i) {
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 5),
+                      child: Card(
+                        elevation: 2,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 25, horizontal: 5),
+                          child: Text(
+                            'Status',
+                            style: TextStyle(
+                                color: Theme.of(context).colorScheme.primary),
+                          ),
+                        ),
+                      ),
+                    );
+                  }),
+            ),
           )
         ],
       ),
