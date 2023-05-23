@@ -4,6 +4,7 @@ import 'package:ecorporativo/src/features/authentication/presenter/pages/contrac
 import 'package:ecorporativo/src/features/authentication/presenter/pages/signin_page.dart';
 import 'package:ecorporativo/src/features/authentication/presenter/pages/splash_page.dart';
 import 'package:ecorporativo/src/features/home/presenter/pages/home_page.dart';
+import 'package:ecorporativo/src/features/support_summary/presenter/pages/support_summary_page.dart';
 import 'package:ecorporativo/src/shared/config/navigation.dart';
 import 'package:flutter/material.dart';
 
@@ -49,6 +50,7 @@ class MyApp extends StatelessWidget {
         "/contract_acceptance/success": (context) =>
             const ContractSuccessPage(),
         "/home": (context) => const HomePage(),
+        "/support_summary": (context) => const SupportSummaryPage(),
         "/invoices-choose-date": (context) => const HistoryInvoicesPage(),
       },
       home: const SplashPage(),

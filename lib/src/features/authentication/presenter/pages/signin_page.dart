@@ -75,7 +75,7 @@ class _SigninPageState extends State<SigninPage> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             const Text(
-                              "CPF / Nome de usuário / email",
+                              "CPF / CNPJ",
                               style: TextStyle(
                                   fontSize: 16, fontWeight: FontWeight.w400),
                             ),
@@ -85,6 +85,7 @@ class _SigninPageState extends State<SigninPage> {
                             SizedBox(
                               height: 56,
                               child: TextField(
+                                keyboardType: TextInputType.number,
                                 autofillHints: const [AutofillHints.username],
                                 enableSuggestions: true,
                                 controller: loginController,
