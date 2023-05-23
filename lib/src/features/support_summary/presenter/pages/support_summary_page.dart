@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../../home/presenter/widgets/home_card_last_invoices.dart';
-
 class SupportSummaryPage extends StatefulWidget {
   const SupportSummaryPage({super.key});
 
@@ -62,7 +60,7 @@ class _SupportSummaryPageState extends State<SupportSummaryPage> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Card(
-              elevation: 2,
+              elevation: 1,
               child: Container(
                   width: double.infinity,
                   color: Theme.of(context).colorScheme.background,
@@ -72,57 +70,57 @@ class _SupportSummaryPageState extends State<SupportSummaryPage> {
                       children: [
                         Row(
                           children: [
-                            Text(
+                            const Text(
                               "Data do abetura: ",
                               style: TextStyle(
-                                fontSize: 14,
-                                color: Theme.of(context).colorScheme.primary,
-                              ),
+                                  fontSize: 14, fontWeight: FontWeight.w500),
                             ),
                             const Expanded(child: SizedBox()),
                             Text(
-                              "11/12/2023",
+                              "11/12/2023 as 10:20",
                               style: TextStyle(
                                 fontSize: 14,
-                                color: Theme.of(context).colorScheme.primary,
+                                color: Colors.grey.shade600,
                               ),
                             ),
                           ],
                         ),
+                        const SizedBox(
+                          height: 5,
+                        ),
                         Row(
                           children: [
-                            Text(
+                            const Text(
                               "Data do atendimento: ",
                               style: TextStyle(
-                                fontSize: 14,
-                                color: Theme.of(context).colorScheme.primary,
-                              ),
+                                  fontSize: 14, fontWeight: FontWeight.w500),
                             ),
                             const Expanded(child: SizedBox()),
                             Text(
-                              "11/12/2023",
+                              "11/12/2023 as 10:20",
                               style: TextStyle(
                                 fontSize: 14,
-                                color: Theme.of(context).colorScheme.primary,
+                                color: Colors.grey.shade600,
                               ),
                             ),
                           ],
                         ),
+                        const SizedBox(
+                          height: 5,
+                        ),
                         Row(
                           children: [
-                            Text(
+                            const Text(
                               "Data de finalização:",
                               style: TextStyle(
-                                fontSize: 14,
-                                color: Theme.of(context).colorScheme.primary,
-                              ),
+                                  fontSize: 14, fontWeight: FontWeight.w500),
                             ),
                             const Expanded(child: SizedBox()),
                             Text(
-                              "11/12/2023",
+                              "11/12/2023 as 10:20",
                               style: TextStyle(
                                 fontSize: 14,
-                                color: Theme.of(context).colorScheme.primary,
+                                color: Colors.grey.shade600,
                               ),
                             ),
                           ],
@@ -137,18 +135,25 @@ class _SupportSummaryPageState extends State<SupportSummaryPage> {
           ),
           Row(
             children: [
-              Container(
-                height: 2,
-                width: 100,
-                color: Colors.grey,
+              Expanded(
+                child: Container(
+                  height: 2,
+                  color: Colors.grey.shade200,
+                ),
               ),
-              const Expanded(child: SizedBox()),
-              const Text('//////////////'),
-              const Expanded(child: SizedBox()),
-              Container(
-                height: 2,
-                width: 100,
-                color: Colors.grey,
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 24),
+                child: Center(
+                    child: Text(
+                  'Histórico',
+                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.w500),
+                )),
+              ),
+              Expanded(
+                child: Container(
+                  height: 2,
+                  color: Colors.grey.shade200,
+                ),
               ),
             ],
           ),
