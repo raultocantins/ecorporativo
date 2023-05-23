@@ -11,7 +11,7 @@ class CreateHelpDeskDatasourceImpl implements CreateHelpDeskDatasource {
       required int userId}) async {
     try {
       await HttpService().dio.post(
-        'recursos/informePagamento/',
+        'recursos/registroHelpDesk/',
         data: {
           "codigo_contrato": contractId,
           "codigo_contrato_item": contractItem,

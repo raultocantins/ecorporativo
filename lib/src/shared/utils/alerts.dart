@@ -65,7 +65,7 @@ class AlertsCustom {
     Size size = MediaQuery.of(context).size;
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        backgroundColor: Theme.of(context).primaryColor,
+        backgroundColor: const Color(0xffEF5350),
         duration: const Duration(seconds: 4),
         padding: const EdgeInsets.all(0),
         content: SafeArea(

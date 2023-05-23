@@ -26,8 +26,6 @@ class _SupportPageState extends State<SupportPage> {
     super.initState();
     controller = GetIt.I.get<SupportController>();
     authController = GetIt.I.get<AuthController>();
-    controller
-        .changeContractId(authController.contractsList?.contracts[0].id ?? 0);
     controller.changeUserId(authController.user!.id);
     controller.getHelpDesk();
   }

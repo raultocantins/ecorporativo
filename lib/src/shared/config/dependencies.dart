@@ -9,14 +9,17 @@ import 'package:ecorporativo/src/features/authentication/external/login_datasour
 import 'package:ecorporativo/src/features/authentication/external/sign_contract_datasource.dart';
 import 'package:ecorporativo/src/features/authentication/presenter/controller/auth_controller.dart';
 import 'package:ecorporativo/src/features/home/data/repositories/create_helpdesk_repository.dart';
+import 'package:ecorporativo/src/features/home/data/repositories/get_contract_items_repository.dart';
 import 'package:ecorporativo/src/features/home/data/repositories/get_helpdesk_repository.dart';
 import 'package:ecorporativo/src/features/home/data/repositories/get_invoices_repository.dart';
 import 'package:ecorporativo/src/features/home/data/repositories/trust_release_repository.dart';
 import 'package:ecorporativo/src/features/home/domain/usecases/create_helpdesk_usecase.dart';
+import 'package:ecorporativo/src/features/home/domain/usecases/get_contract_items_usecase.dart';
 import 'package:ecorporativo/src/features/home/domain/usecases/get_helpdesk_usecase.dart';
 import 'package:ecorporativo/src/features/home/domain/usecases/get_invoices_usecase.dart';
 import 'package:ecorporativo/src/features/home/domain/usecases/trust_release_usecase.dart';
 import 'package:ecorporativo/src/features/home/external/create_helpdesk_datasource.dart';
+import 'package:ecorporativo/src/features/home/external/get_contract_items_datasource.dart';
 import 'package:ecorporativo/src/features/home/external/get_helpdesk_datasource.dart';
 import 'package:ecorporativo/src/features/home/external/get_invoices_datasource.dart';
 import 'package:ecorporativo/src/features/home/external/trust_release_datasource.dart';
@@ -84,6 +87,14 @@ registerDependencies() {
     ),
   );
 
+  getIt.registerLazySingleton<GetContractItems>(
+    () => GetContractItemsImpl(
+      getContractItemsRepository: GetContractItemsRepositoryImpl(
+        getContractItemsDatasource: GetContractItemsDatasourceImpl(),
+      ),
+    ),
+  );
+
   //AUTH CONTROLLER
   getIt.registerLazySingleton<AuthController>(
     () => AuthController(
@@ -100,6 +111,8 @@ registerDependencies() {
   //SUPPORT CONTROLLER
   getIt.registerLazySingleton<SupportController>(
     () => SupportController(
-        getHelpDeskUsecase: getIt(), createHelpDeskUsecase: getIt()),
+        getHelpDeskUsecase: getIt(),
+        createHelpDeskUsecase: getIt(),
+        getContractItems: getIt()),
   );
 }

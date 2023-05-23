@@ -183,8 +183,15 @@ class _InvoicesPageState extends State<InvoicesPage> {
                                       children: [
                                         ElevatedButton(
                                           onPressed: () {
-                                            _controller
-                                                .trustReleaseContract(context);
+                                            _controller.trustReleaseContract(
+                                                context,
+                                                codigoFinanceiro: _controller
+                                                    .invoices!.invoices
+                                                    .where((element) =>
+                                                        element.situacao ==
+                                                        'Aberto')
+                                                    .first
+                                                    .codigoRegistro!);
                                           },
                                           style: ButtonStyle(
                                               fixedSize:

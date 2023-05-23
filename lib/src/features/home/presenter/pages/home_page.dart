@@ -31,7 +31,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   String appbarTitle() {
     switch (tabController.index) {
       case 0:
-        return "Olá ${shortText(authController.user?.fullname ?? "")}";
+        return "Olá ${authController.user?.fullname.toLowerCase() ?? ""}";
 
       case 1:
         return "Faturas";
@@ -43,10 +43,6 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
       default:
         return "";
     }
-  }
-
-  shortText(String text) {
-    return (text.length > 18 ? text.substring(0, 18) : text).toLowerCase();
   }
 
   void changeIndexPage(int index) {
@@ -65,12 +61,34 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
           centerTitle: tabController.index != 0 ? true : false,
           backgroundColor: Theme.of(context).colorScheme.primary,
           elevation: 0,
-          title: Text(
-            appbarTitle(),
-            style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.w500,
-                color: Theme.of(context).colorScheme.background),
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              SizedBox(
+                width: 270,
+                child: Text(
+                  appbarTitle(),
+                  style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w500,
+                      color: Theme.of(context).colorScheme.background),
+                ),
+              ),
+              tabController.index == 0
+                  ? GestureDetector(
+                      onTap: () {
+                        Navigator.of(context)
+                            .pushReplacementNamed('/splashpage');
+                        authController.dispose();
+                      },
+                      child: const Icon(
+                        Icons.logout,
+                        color: Colors.white,
+                        size: 26,
+                      ),
+                    )
+                  : Container()
+            ],
           ),
           leadingWidth: 49,
           titleSpacing: 16,

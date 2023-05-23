@@ -7,6 +7,7 @@ import 'package:ecorporativo/src/shared/utils/date_format.dart';
 import 'package:flutter/widgets.dart';
 import 'package:mobx/mobx.dart';
 
+import '../../../../shared/config/navigation.dart';
 import '../../../../shared/utils/alerts.dart';
 
 part 'invoices_controller.g.dart';
@@ -66,7 +67,12 @@ abstract class _InvoicesControllerBase with Store {
     clearInvoices();
 
     var result = await getInvoices(contractId: contractId!);
-    result.fold((l) => null, (r) {
+    result.fold(
+        (l) => AlertsCustom.error(NavigationCustom.currentState.context,
+            title: l,
+            message:
+                "Por algum motivo não conseguimos concluir sua solicitação!"),
+        (r) {
       if (r.invoices.length > 3) {
         List<InvoiceEntity> newlist = r.invoices.sublist(3, r.invoices.length);
         changeMoreInvoices(InvoicesEntity(invoices: newlist));
@@ -78,10 +84,21 @@ abstract class _InvoicesControllerBase with Store {
     changeIsLoading(false);
   }
 
-  trustReleaseContract(BuildContext context) async {
+  trustReleaseContract(
+    BuildContext context, {
+    required int codigoFinanceiro,
+  }) async {
     changeIsLoading(true);
-    final result = await trustRelease(contractId: contractId!, user: user!);
-    result.fold((l) => null, (r) {
+    final result = await trustRelease(
+        contractId: contractId!,
+        user: user!,
+        codigoFinanceiro: codigoFinanceiro);
+    result.fold(
+        (l) => AlertsCustom.error(NavigationCustom.currentState.context,
+            title: l,
+            message:
+                "Por algum motivo não conseguimos concluir sua solicitação!"),
+        (r) {
       fetchInvoices();
       AlertsCustom.success(context,
           title: "Contrato desbloqueado",

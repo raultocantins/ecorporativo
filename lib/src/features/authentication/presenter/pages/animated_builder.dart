@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class AnimatedBuilderCustom extends StatefulWidget {
   final double opacity;
   final Function()? onPressed;

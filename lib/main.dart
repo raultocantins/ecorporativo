@@ -44,6 +44,7 @@ class MyApp extends StatelessWidget {
           fontFamily: "NotoSans"),
       routes: {
         "/signin": (context) => const SigninPage(),
+        "/splashpage": (context) => const SplashPage(),
         "/contract_acceptance": (context) => const ContractAcceptancePage(),
         "/contract_acceptance/read": (context) =>
             const ContractPopupTermsPage(),

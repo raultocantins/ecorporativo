@@ -11,11 +11,14 @@ class TrustReleaseRepositoryImpl implements TrustReleaseRepository {
   @override
   Future<Either<String, void>> call({
     required int contractId,
+    required int codigoFinanceiro,
     required UserEntity user,
   }) async {
     try {
-      return Right(
-          await trustReleaseDatasource(contractId: contractId, user: user));
+      return Right(await trustReleaseDatasource(
+          contractId: contractId,
+          user: user,
+          codigoFinanceiro: codigoFinanceiro));
     } catch (e) {
       return const Left("Aconteceu um erro inesperado");
     }

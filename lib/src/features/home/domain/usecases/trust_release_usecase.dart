@@ -6,6 +6,7 @@ import '../repositories/trust_release_repository.dart';
 abstract class TrustRelease {
   Future<Either<String, void>> call({
     required int contractId,
+    required int codigoFinanceiro,
     required UserEntity user,
   });
 }
@@ -18,8 +19,10 @@ class TrustReleaseImpl implements TrustRelease {
   @override
   Future<Either<String, void>> call({
     required int contractId,
+    required int codigoFinanceiro,
     required UserEntity user,
   }) async {
-    return await trustReleaseRepository(contractId: contractId, user: user);
+    return await trustReleaseRepository(
+        contractId: contractId, user: user, codigoFinanceiro: codigoFinanceiro);
   }
 }

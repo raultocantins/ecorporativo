@@ -9,16 +9,20 @@ class UserModel {
   final int id;
   @JsonKey(name: "nome_completo")
   final String fullname;
-  UserModel({required this.id, required this.fullname});
+  @JsonKey(name: "cpf_cnpj")
+  final String? documento;
+  UserModel({required this.id, required this.fullname, this.documento});
   factory UserModel.fromJson(dynamic json) => _$UserModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$UserModelToJson(this);
 
   static UserEntity toEntity(UserModel model) {
-    return UserEntity(id: model.id, fullname: model.fullname);
+    return UserEntity(
+        id: model.id, fullname: model.fullname, documento: model.documento);
   }
 
   static UserModel toModel(UserEntity entity) {
-    return UserModel(id: entity.id, fullname: entity.fullname);
+    return UserModel(
+        id: entity.id, fullname: entity.fullname, documento: entity.documento);
   }
 }

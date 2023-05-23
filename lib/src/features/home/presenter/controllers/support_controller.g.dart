@@ -41,19 +41,19 @@ mixin _$SupportController on _SupportControllerBase, Store {
     });
   }
 
-  late final _$contractIdAtom =
-      Atom(name: '_SupportControllerBase.contractId', context: context);
+  late final _$itemsContractAtom =
+      Atom(name: '_SupportControllerBase.itemsContract', context: context);
 
   @override
-  int? get contractId {
-    _$contractIdAtom.reportRead();
-    return super.contractId;
+  ContractItemsEntity? get itemsContract {
+    _$itemsContractAtom.reportRead();
+    return super.itemsContract;
   }
 
   @override
-  set contractId(int? value) {
-    _$contractIdAtom.reportWrite(value, super.contractId, () {
-      super.contractId = value;
+  set itemsContract(ContractItemsEntity? value) {
+    _$itemsContractAtom.reportWrite(value, super.itemsContract, () {
+      super.itemsContract = value;
     });
   }
 
@@ -88,17 +88,6 @@ mixin _$SupportController on _SupportControllerBase, Store {
   }
 
   @override
-  dynamic changeContractId(int value) {
-    final _$actionInfo = _$_SupportControllerBaseActionController.startAction(
-        name: '_SupportControllerBase.changeContractId');
-    try {
-      return super.changeContractId(value);
-    } finally {
-      _$_SupportControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
   dynamic changeHelpDesk(HelpDeskListEntity value) {
     final _$actionInfo = _$_SupportControllerBaseActionController.startAction(
         name: '_SupportControllerBase.changeHelpDesk');
@@ -121,6 +110,17 @@ mixin _$SupportController on _SupportControllerBase, Store {
   }
 
   @override
+  dynamic changeItemsContract(ContractItemsEntity? value) {
+    final _$actionInfo = _$_SupportControllerBaseActionController.startAction(
+        name: '_SupportControllerBase.changeItemsContract');
+    try {
+      return super.changeItemsContract(value);
+    } finally {
+      _$_SupportControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   dynamic dispose() {
     final _$actionInfo = _$_SupportControllerBaseActionController.startAction(
         name: '_SupportControllerBase.dispose');
@@ -136,7 +136,7 @@ mixin _$SupportController on _SupportControllerBase, Store {
     return '''
 isLoading: ${isLoading},
 userId: ${userId},
-contractId: ${contractId},
+itemsContract: ${itemsContract},
 helpDeskListEntity: ${helpDeskListEntity}
     ''';
   }

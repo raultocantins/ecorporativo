@@ -7,6 +7,8 @@ import 'package:ecorporativo/src/features/authentication/domain/usecases/sign_co
 import 'package:ecorporativo/src/shared/config/navigation.dart';
 import 'package:mobx/mobx.dart';
 
+import '../../../../shared/utils/alerts.dart';
+
 part 'auth_controller.g.dart';
 
 // ignore: library_private_types_in_public_api
@@ -55,7 +57,13 @@ abstract class _AuthControllerBase with Store {
   void login({required String login, required String password}) async {
     changeIsLoading(true);
     var result = await loginUsecase(login: login, password: password);
-    result.fold((l) => {changeIsLoading(false)}, (r) {
+    result.fold((l) {
+      AlertsCustom.error(NavigationCustom.currentState.context,
+          title: l,
+          message:
+              "Por algum motivo não conseguimos concluir sua solicitação!");
+      changeIsLoading(false);
+    }, (r) {
       changeUser(r);
       getContracts();
     });
@@ -63,8 +71,17 @@ abstract class _AuthControllerBase with Store {
 
   void getContracts() async {
     var result = await getContractsUsecase(userid: user?.id ?? 0);
-    result.fold((l) => {changeIsLoading(false)}, (r) {
-      changeContractsList(r);
+    result.fold((l) {
+      AlertsCustom.error(NavigationCustom.currentState.context,
+          title: l,
+          message:
+              "Por algum motivo não conseguimos concluir sua solicitação!");
+      changeIsLoading(false);
+    }, (r) {
+      changeContractsList(ContractsEntity(
+          contracts: r.contracts
+              .where((element) => element.codigoStatus != 'C')
+              .toList()));
       validateContracts();
     });
   }
@@ -86,7 +103,12 @@ abstract class _AuthControllerBase with Store {
     changeIsLoading(true);
     final result = await signContractUsecase(contractId: id);
 
-    result.fold((l) => null, (r) {
+    result.fold((l) {
+      AlertsCustom.error(NavigationCustom.currentState.context,
+          title: l,
+          message:
+              "Por algum motivo não conseguimos concluir sua solicitação!");
+    }, (r) {
       List<ContractItemEntity> list = contractsList?.contracts ?? [];
       for (ContractItemEntity e in list) {
         if (e.id == id) {

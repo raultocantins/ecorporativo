@@ -20,8 +20,29 @@ class _ProfilePageState extends State<ProfilePage> {
     authController = GetIt.I.get<AuthController>();
     nameEditingController =
         TextEditingController(text: authController.user?.fullname ?? "");
-    documentEditingController =
-        TextEditingController(text: "29.586.340/0001-28");
+    documentEditingController = TextEditingController(
+        text: formatNumber(authController.user?.documento ?? ""));
+  }
+
+  String formatNumber(String number) {
+    String formattedNumber = number.replaceAll(RegExp(r'\D'), '');
+
+    if (formattedNumber.length == 11) {
+      // CPF
+      return '${formattedNumber.substring(0, 3)}.${formattedNumber.substring(3, 6)}.${formattedNumber.substring(6, 9)}-${formattedNumber.substring(9)}';
+    } else if (formattedNumber.length == 14) {
+      // CNPJ
+      return '${formattedNumber.substring(0, 2)}.${formattedNumber.substring(2, 5)}.${formattedNumber.substring(5, 8)}/${formattedNumber.substring(8, 12)}-${formattedNumber.substring(12)}';
+    } else {
+      return '00.000.000/0000-00';
+    }
+  }
+
+  @override
+  void dispose() {
+    nameEditingController.dispose();
+    documentEditingController.dispose();
+    super.dispose();
   }
 
   @override

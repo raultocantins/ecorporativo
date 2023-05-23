@@ -8,6 +8,7 @@ class TrustReleaseDatasourceImpl implements TrustReleaseDatasource {
   @override
   Future<void> call({
     required int contractId,
+    required int codigoFinanceiro,
     required UserEntity user,
   }) async {
     try {
@@ -15,7 +16,7 @@ class TrustReleaseDatasourceImpl implements TrustReleaseDatasource {
         'recursos/informePagamento/',
         data: {
           "codigo_contrato": contractId,
-          "data_pagamento": DateFormat("yyyy/MM/DD", "pt_BR")
+          "data_pagamento": DateFormat("yyyy-MM-dd", "pt_BR")
               .format(DateTime.now().toLocal()),
           "cpf_cnpj": user.documento,
           "codigo_financeiro": 0,
