@@ -20,8 +20,8 @@ class SupportCardPreviousCallWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Navigator.of(context)
-          .pushNamed('/support_summary', arguments: {"id": entity.id}),
+      // onTap: () => Navigator.of(context)
+      //     .pushNamed('/support_summary', arguments: {"id": entity.id}),
       child: Container(
         decoration: BoxDecoration(
           color: Colors.white, //ADD IN THEME

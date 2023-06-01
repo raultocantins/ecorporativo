@@ -9,10 +9,14 @@ class SupportCardServices extends StatelessWidget {
   const SupportCardServices({required this.entity, super.key});
 
   String formatOpenDate(DateTime date) {
-    initializeDateFormatting();
-    String dateFormatter =
-        DateFormat("dd MMMM yyyy", "pt_BR").format(date.toLocal());
-    return 'Aberto em $dateFormatter';
+    if (entity.dates.serviceDate != null) {
+      initializeDateFormatting();
+      String dateFormatter =
+          DateFormat("dd MMMM yyyy", "pt_BR").format(date.toLocal());
+      return 'Aberto em $dateFormatter';
+    } else {
+      return '';
+    }
   }
 
   String formatScheduledDate(DateTime date) {
@@ -34,8 +38,8 @@ class SupportCardServices extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Navigator.of(context)
-          .pushNamed('/support_summary', arguments: {"id": entity.id}),
+      // onTap: () => Navigator.of(context)
+      //     .pushNamed('/support_summary', arguments: {"id": entity.id}),
       child: Padding(
         padding: const EdgeInsets.only(right: 8.0),
         child: Container(
@@ -57,34 +61,63 @@ class SupportCardServices extends StatelessWidget {
                 const SizedBox(
                   width: 18,
                 ),
-                Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'agendado para',
-                        style: TextStyle(
-                            color: Colors.grey.shade400, //ADD IN THEME
-                            fontSize: 10),
-                      ),
-                      Text(
-                        formatScheduledDate(
-                            entity.dates.serviceDate ?? DateTime.now()),
-                        style: TextStyle(
-                            color: Theme.of(context)
-                                .colorScheme
-                                .primary, //ADD IN THEME
-                            fontSize: 24,
-                            fontWeight: FontWeight.w500),
-                      ),
-                      Text(
-                        formatScheduledDateDay(
-                            entity.dates.serviceDate ?? DateTime.now()),
-                        style: TextStyle(
-                            color: Colors.grey.shade400,
-                            fontSize: 12), //ADD IN THEME
-                      ),
-                    ]),
+                (entity.dates.serviceDate != null)
+                    ? Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                            Text(
+                              'agendado para',
+                              style: TextStyle(
+                                  color: Colors.grey.shade400, //ADD IN THEME
+                                  fontSize: 10),
+                            ),
+                            Text(
+                              formatScheduledDate(
+                                  entity.dates.serviceDate ?? DateTime.now()),
+                              style: TextStyle(
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .primary, //ADD IN THEME
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.w500),
+                            ),
+                            Text(
+                              formatScheduledDateDay(
+                                  entity.dates.serviceDate ?? DateTime.now()),
+                              style: TextStyle(
+                                  color: Colors.grey.shade400,
+                                  fontSize: 12), //ADD IN THEME
+                            ),
+                          ])
+                    : Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                            Text(
+                              'Solicitado em',
+                              style: TextStyle(
+                                  color: Colors.grey.shade400, //ADD IN THEME
+                                  fontSize: 10),
+                            ),
+                            Text(
+                              formatScheduledDate(
+                                  entity.dates.openingDate ?? DateTime.now()),
+                              style: TextStyle(
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .primary, //ADD IN THEME
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.w500),
+                            ),
+                            Text(
+                              formatScheduledDateDay(
+                                  entity.dates.openingDate ?? DateTime.now()),
+                              style: TextStyle(
+                                  color: Colors.grey.shade400,
+                                  fontSize: 12), //ADD IN THEME
+                            ),
+                          ]),
                 const Expanded(child: SizedBox()),
                 Column(
                     mainAxisAlignment: MainAxisAlignment.center,

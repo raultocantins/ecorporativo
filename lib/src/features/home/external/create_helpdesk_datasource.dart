@@ -16,7 +16,7 @@ class CreateHelpDeskDatasourceImpl implements CreateHelpDeskDatasource {
           "codigo_contrato": contractId,
           "codigo_contrato_item": contractItem,
           "codigo_cliente": userId,
-          "tipo_demanda": 4,
+          "tipo_demanda": 3,
           "codigo_servico": service,
           "codigo_sintoma": prognostic
         },
