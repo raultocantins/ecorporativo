@@ -69,27 +69,32 @@ class SupportCardPreviousCallWidget extends StatelessWidget {
                   ]),
               const Expanded(child: SizedBox()),
               Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  SizedBox(
-                    height: 20,
-                    width: 96,
-                    child: ElevatedButton(
-                      onPressed: () {},
-                      style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all(
-                              const Color(0xff4CAF50)), //ADD IN THEME
-                          shape:
-                              MaterialStateProperty.all<RoundedRectangleBorder>(
-                                  RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(25),
-                          ))),
-                      child: Text(
-                        'atendido',
-                        style: TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.w400,
-                            color: Theme.of(context).colorScheme.background),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 15.0),
+                    child: SizedBox(
+                      height: 20,
+                      child: ElevatedButton(
+                        onPressed: () {},
+                        style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all(
+                                entity.status.code == "1"
+                                    ? Theme.of(context).colorScheme.secondary
+                                    : const Color(0xff4CAF50)), //ADD IN THEME
+                            shape: MaterialStateProperty.all<
+                                RoundedRectangleBorder>(RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(25),
+                            ))),
+                        child: Text(
+                          entity.status.code == "1"
+                              ? "Em atendimento"
+                              : 'atendido',
+                          style: TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.w400,
+                              color: Theme.of(context).colorScheme.background),
+                        ),
                       ),
                     ),
                   ),

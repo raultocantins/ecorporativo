@@ -112,7 +112,8 @@ class _SupportSummaryPageState extends State<SupportSummaryPage> {
                       ),
                     ),
                   ),
-                  (_controller.called?.status.code == '0')
+                  (_controller.called?.status.code == '0' ||
+                          _controller.called?.status.code == '1')
                       ? LinearProgressIndicator(
                           color: Theme.of(context).colorScheme.secondary,
                         )

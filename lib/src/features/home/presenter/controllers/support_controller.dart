@@ -43,7 +43,9 @@ abstract class _SupportControllerBase with Store {
 
   List<HelpDeskEntity> get helpDeskListFinalized {
     return helpDeskListEntity?.called
-            .where((e) => e.status.code == "2")
+            .where((e) => e.status.code == "2" || e.status.code == "1")
+            .toList()
+            .reversed
             .toList() ??
         [];
   }
