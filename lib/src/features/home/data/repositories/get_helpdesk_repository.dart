@@ -9,11 +9,11 @@ class GetHelpDeskRepositoryImpl implements GetHelpDeskRepository {
 
   GetHelpDeskRepositoryImpl({required this.getHelpDeskDatasource});
   @override
-  Future<Either<String, HelpDeskListEntity>> call({
-    required int userId,
-  }) async {
+  Future<Either<String, HelpDeskListEntity>> call(
+      {required int userId, String? helpDeskId}) async {
     try {
-      final result = await getHelpDeskDatasource(userId: userId);
+      final result =
+          await getHelpDeskDatasource(userId: userId, helpDeskId: helpDeskId);
       HelpDeskListEntity contractsEntity = HelpDeskListModel.toEntity(result);
       return Right(contractsEntity);
     } catch (e) {

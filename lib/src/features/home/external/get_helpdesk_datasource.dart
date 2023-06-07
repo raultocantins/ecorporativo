@@ -4,15 +4,15 @@ import '../data/datasources/get_helpdesk_datasource.dart';
 
 class GetHelpDeskDatasourceImpl implements GetHelpDeskDatasource {
   @override
-  Future<HelpDeskListModel> call({
-    required int userId,
-  }) async {
+  Future<HelpDeskListModel> call(
+      {required int userId, String? helpDeskId}) async {
     try {
       final response = await HttpService().dio.get(
         'recursos/consultaHelpDesk/',
         data: {
           "codigo_cliente": userId,
-          "chave": "idcorpbrasil-isp.tins.com.br"
+          "codigo_helpdesk": helpDeskId,
+          "chave": HttpService().chave
         },
       );
       return HelpDeskListModel.fromJson(response.data);

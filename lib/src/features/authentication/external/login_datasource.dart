@@ -11,11 +11,7 @@ class LoginDatasourceImpl implements LoginDatasource {
     try {
       final response = await HttpService().dio.get(
         'recursos/validaCredenciais/',
-        data: {
-          "login": login,
-          "senha": password,
-          "chave": "idcorpbrasil-isp.tins.com.br"
-        },
+        data: {"login": login, "senha": password, "chave": HttpService().chave},
       );
       return UserModel.fromJson(response.data);
     } catch (e) {

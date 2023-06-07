@@ -15,12 +15,10 @@ class TrustReleaseDatasourceImpl implements TrustReleaseDatasource {
       await HttpService().dio.post(
         'recursos/informePagamento/',
         data: {
-          // "codigo_contrato": contractId,
           "data_pagamento": DateFormat("yyyy-MM-dd", "pt_BR")
               .format(DateTime.now().toLocal()),
           "cpf_cnpj": user.documento,
           "codigo_financeiro": codigoFinanceiro,
-          // "codigo_cliente": user.id
         },
       );
     } catch (e) {

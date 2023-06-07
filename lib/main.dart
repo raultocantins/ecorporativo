@@ -51,7 +51,6 @@ class MyApp extends StatelessWidget {
         "/contract_acceptance/success": (context) =>
             const ContractSuccessPage(),
         "/home": (context) => const HomePage(),
-        "/support_summary": (context) => const SupportSummaryPage(),
         "/invoices-choose-date": (context) => const HistoryInvoicesPage(),
       },
       home: const SplashPage(),

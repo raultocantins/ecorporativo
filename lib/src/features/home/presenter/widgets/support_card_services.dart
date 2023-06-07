@@ -1,4 +1,5 @@
 import 'package:ecorporativo/src/features/home/domain/entities/helpdesk_entity.dart';
+import 'package:ecorporativo/src/features/support_summary/presenter/pages/support_summary_page.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
@@ -38,8 +39,14 @@ class SupportCardServices extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      // onTap: () => Navigator.of(context)
-      //     .pushNamed('/support_summary', arguments: {"id": entity.id}),
+      onTap: () => Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => SupportSummaryPage(
+            helpDeskId: entity.id.toString(),
+          ),
+        ),
+      ),
       child: Padding(
         padding: const EdgeInsets.only(right: 8.0),
         child: Container(

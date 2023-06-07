@@ -3,9 +3,8 @@ import 'package:ecorporativo/src/features/home/domain/entities/helpdesk_list_ent
 import '../repositories/get_helpdesk_repository.dart';
 
 abstract class GetHelpDesk {
-  Future<Either<String, HelpDeskListEntity>> call({
-    required int userId,
-  });
+  Future<Either<String, HelpDeskListEntity>> call(
+      {required int userId, String? helpDeskId});
 }
 
 class GetHelpDeskImpl implements GetHelpDesk {
@@ -14,9 +13,8 @@ class GetHelpDeskImpl implements GetHelpDesk {
   GetHelpDeskImpl({required this.getHelpDeskRepository});
 
   @override
-  Future<Either<String, HelpDeskListEntity>> call({
-    required int userId,
-  }) async {
-    return await getHelpDeskRepository(userId: userId);
+  Future<Either<String, HelpDeskListEntity>> call(
+      {required int userId, String? helpDeskId}) async {
+    return await getHelpDeskRepository(userId: userId, helpDeskId: helpDeskId);
   }
 }

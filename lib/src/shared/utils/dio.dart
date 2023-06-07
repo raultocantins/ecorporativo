@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 
 class HttpService {
   late Dio dio;
+  final String chave = "idcorpbrasil-isp.tins.com.br";
 
   HttpService() {
     Dio instance = Dio();

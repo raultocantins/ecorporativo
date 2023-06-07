@@ -113,12 +113,19 @@ class _InvoicesPageState extends State<InvoicesPage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           ((_authController.contractsList?.contracts
-                                          .where((element) =>
-                                              element.id ==
-                                              _controller.contractId)
-                                          .first)
-                                      ?.status ==
-                                  "Bloqueado financeiramente")
+                                              .where((element) =>
+                                                  element.id ==
+                                                  _controller.contractId)
+                                              .first)
+                                          ?.status ==
+                                      "Bloqueado financeiramente" ||
+                                  (_authController.contractsList?.contracts
+                                              .where((element) =>
+                                                  element.id ==
+                                                  _controller.contractId)
+                                              .first)
+                                          ?.status ==
+                                      "Suspenso")
                               ? Column(
                                   children: [
                                     Container(
@@ -156,7 +163,7 @@ class _InvoicesPageState extends State<InvoicesPage> {
                                                     fontSize: 20),
                                               ),
                                               Text(
-                                                'Seu plano está suspenso',
+                                                'Seu plano está ${((_authController.contractsList?.contracts.where((element) => element.id == _controller.contractId).first)?.status == "Bloqueado financeiramente") ? "bloqueado" : "suspenso"} ',
                                                 style: TextStyle(
                                                     color: Theme.of(context)
                                                         .colorScheme
@@ -178,39 +185,50 @@ class _InvoicesPageState extends State<InvoicesPage> {
                                     const SizedBox(
                                       height: 10,
                                     ),
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      children: [
-                                        ElevatedButton(
-                                          onPressed: () {
-                                            _controller.trustReleaseContract(
-                                                context,
-                                                codigoFinanceiro: _controller
-                                                    .invoices!.invoices
+                                    ((_authController.contractsList?.contracts
                                                     .where((element) =>
-                                                        element.situacao ==
-                                                        'Aberto')
-                                                    .first
-                                                    .codigoRegistro!);
-                                          },
-                                          style: ButtonStyle(
-                                              fixedSize:
-                                                  MaterialStateProperty.all(
-                                                const Size(200, 48),
+                                                        element.id ==
+                                                        _controller.contractId)
+                                                    .first)
+                                                ?.status ==
+                                            "Suspenso")
+                                        ? Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.end,
+                                            children: [
+                                              ElevatedButton(
+                                                onPressed: () {
+                                                  _controller.trustReleaseContract(
+                                                      context,
+                                                      codigoFinanceiro: _controller
+                                                          .invoices!.invoices
+                                                          .where((element) =>
+                                                              element
+                                                                  .situacao ==
+                                                              'Aberto')
+                                                          .first
+                                                          .codigoRegistro!);
+                                                },
+                                                style: ButtonStyle(
+                                                    fixedSize:
+                                                        MaterialStateProperty
+                                                            .all(
+                                                      const Size(200, 48),
+                                                    ),
+                                                    backgroundColor:
+                                                        MaterialStatePropertyAll(
+                                                      Theme.of(context)
+                                                          .colorScheme
+                                                          .secondary,
+                                                    )),
+                                                child: const Center(
+                                                  child: Text(
+                                                      'Liberação de confiança'),
+                                                ),
                                               ),
-                                              backgroundColor:
-                                                  MaterialStatePropertyAll(
-                                                Theme.of(context)
-                                                    .colorScheme
-                                                    .secondary,
-                                              )),
-                                          child: const Center(
-                                            child:
-                                                Text('Liberação de confiança'),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
+                                            ],
+                                          )
+                                        : Container(),
                                   ],
                                 )
                               : Container(),

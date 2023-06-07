@@ -25,6 +25,7 @@ import 'package:ecorporativo/src/features/home/external/get_invoices_datasource.
 import 'package:ecorporativo/src/features/home/external/trust_release_datasource.dart';
 import 'package:ecorporativo/src/features/home/presenter/controllers/invoices_controller.dart';
 import 'package:ecorporativo/src/features/home/presenter/controllers/support_controller.dart';
+import 'package:ecorporativo/src/features/support_summary/presenter/controllers/support_summary_controller.dart';
 import 'package:ecorporativo/src/shared/utils/dio.dart';
 
 import 'package:get_it/get_it.dart';
@@ -115,4 +116,10 @@ registerDependencies() {
         createHelpDeskUsecase: getIt(),
         getContractItems: getIt()),
   );
+
+  //SUPPORT SUMMARY CONTROLLER
+  getIt.registerLazySingleton<SupportSummaryController>(
+      () => SupportSummaryController(
+            getHelpDeskUsecase: getIt(),
+          ));
 }
